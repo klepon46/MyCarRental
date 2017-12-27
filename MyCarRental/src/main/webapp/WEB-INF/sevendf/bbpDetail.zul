@@ -1,0 +1,133 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroBbpHeaderVM')">
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Barge Blending Plan Input" />
+		</div>
+
+		<hbox></hbox>
+
+		<separator />
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+
+		<hbox align="center">
+			<cell width="100px">
+				<label value="BLS History" />
+			</cell>
+
+			<cell>
+				<combobox model="@load(vm.blsHistories)"
+					selectedItem="@bind(vm.selectedBlsHistory)">
+					<template name="model">
+						<comboitem value="@load(each)"
+							label="@load(each)" />
+					</template>
+				</combobox>
+			</cell>
+
+			<space />
+
+			<cell>
+				<button label="Pull" zclass="btn" sclass="btn-danger"
+					onClick="@command('pull')" width="100px" />
+			</cell>
+		</hbox>
+
+		<separator />
+
+		<groupbox>
+			<caption label="K1" />
+			<listbox model="@load(vm.bbpDetails)" mold="paging"
+				pageSize="10" pagingPosition="bottom"
+				emptyMessage="No Records Found" sclass="own"
+				selectedItem="@bind(vm.bbpDtl)">
+				<listhead>
+					<listheader label="Barge ID" />
+					<listheader label="Barge Name" />
+					<listheader label="ETL" width="200px" />
+					<listheader label="ETC" width="200px" />
+					<listheader label="Product" />
+					<listheader label="Destination" />
+					<listheader label="Jetty" />
+					<listheader label="BLS Time" />
+					<listheader label="" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell label="@load(each.bargeId)" />
+						<listcell label="@load(each.bargeName)" />
+						<listcell>
+							<datebox value="@bind(each.startDate)"
+								format="dd-MM-yyyy HH:mm" width="150px" />
+						</listcell>
+						<listcell>
+							<datebox value="@bind(each.finishDate)"
+								format="dd-MM-yyyy HH:mm" width="150px" />
+						</listcell>
+						<listcell label="@load(each.product)" />
+						<listcell label="@load(each.destination)" />
+						<listcell label="@load(each.jetty)" />
+						<listcell
+							label="@load(each.entryTime) @converter('formatedDate',format='dd-MM-yyyy HH:mm')" />
+						<listcell>
+							<button label="Update" sclass="btn-info"
+								zclass="btn" onClick="@command('update', me = each)" />
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+		</groupbox>
+
+		<separator />
+		
+		<groupbox>
+			<caption label="K3" />
+			<listbox model="@load(vm.bbpDetails2)" mold="paging"
+				pageSize="10" pagingPosition="bottom"
+				emptyMessage="No Records Found" sclass="own"
+				selectedItem="@bind(vm.bbpDtl)">
+				<listhead>
+					<listheader label="Barge ID" />
+					<listheader label="Barge Name" />
+					<listheader label="ETL" width="200px" />
+					<listheader label="ETC" width="200px" />
+					<listheader label="Product" />
+					<listheader label="Destination" />
+					<listheader label="Jetty" />
+					<listheader label="BLS Time" />
+					<listheader label="" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell label="@load(each.bargeId)" />
+						<listcell label="@load(each.bargeName)" />
+						<listcell>
+							<datebox value="@bind(each.startDate)"
+								format="dd-MM-yyyy HH:mm" width="150px" />
+						</listcell>
+						<listcell>
+							<datebox value="@bind(each.finishDate)"
+								format="dd-MM-yyyy HH:mm" width="150px" />
+						</listcell>
+						<listcell label="@load(each.product)" />
+						<listcell label="@load(each.destination)" />
+						<listcell label="@load(each.jetty)" />
+						<listcell
+							label="@load(each.entryTime) @converter('formatedDate',format='dd-MM-yyyy HH:mm')" />
+						<listcell>
+							<button label="Update" sclass="btn-info"
+								zclass="btn" onClick="@command('update', me = each)" />
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+		</groupbox>
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

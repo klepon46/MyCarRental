@@ -1,0 +1,194 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroJetCrushHeaderVM')"
+		form="@id('fx') @init(vm.form) @load(vm.jetDetail) @save(vm.jetDetail, before='save')">
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="@load(vm.formDetailTitle)" />
+		</div>
+
+		<hlayout>
+			<button label="Back" sclass="btn-danger" zclass="btn"
+				iconSclass="glyphicon glyphicon-chevron-left"
+				onClick="@command('back')" height="30px" width="100px" />
+
+			<button label="Add New" onClick="@command('addNewEntry')"
+				sclass="btn-warning" zclass="btn"
+				iconSclass="glyphicon glyphicon-plus" height="30px" width="100px" />
+
+			<button label="Delete" onClick="@command('delete')"
+				sclass="btn-info" zclass="btn"
+				iconSclass="glyphicon glyphicon-remove" height="30px" width="100px"
+				disabled="@load(vm.qc)" />
+
+			<button label="Save"
+				onClick="@command('save',cmbLvl1 = cmbLvl1, cmbLvl2 = cmbLvl2 ,cmbLvl3 = cmbLvl3)"
+				sclass="btn-success" zclass="btn"
+				iconSclass="glyphicon glyphicon-floppy-disk" height="30px"
+				width="100px" disabled="@load(vm.qc)" />
+
+		</hlayout>
+
+		<separator />
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+
+		<groupbox>
+			<caption label="Time Consumption" />
+
+			<hbox>
+				<listbox sclass="own-blue" mold="paging"
+					pageSize="10">
+					<listhead>
+						<listheader label="Line" width="80px" />
+						<listheader label="Start Time" width="130px" />
+						<listheader label="Stop Time" width="130px" />
+						<listheader label="Lost Time" width="100px" />
+						<listheader label="Level 1" />
+						<listheader label="Level 2" />
+						<listheader label="Level 3" />
+						<listheader label="Note" />
+					</listhead>
+					<listitem sclass="task-blue" width="200px">
+						<listcell>
+							<combobox model="@load(vm.jetPlans)"
+								value="@bind(vm.jetDetail.lineCode)" width="65px"
+								onSelect="@command('onSelectLine')">
+								<template name="model">
+									<comboitem
+										label="@load(each.pk.lineCode)" />
+								</template>
+							</combobox>
+						</listcell>
+						<listcell>
+							<timebox format="HH:mm"
+								value="@bind(vm.startTimex)" id="startTimeBox"
+								onChange="@command('onChangeTime')" />
+						</listcell>
+						<listcell>
+							<timebox format="HH:mm"
+								value="@load(vm.stopTimex) @save(fx.stopTime)"
+								onCreate="@command('onCreateStopTime', me = self, startBox = startTimeBox)"
+								onChange="@command('onChangeTime')" />
+						</listcell>
+						<listcell>
+							<textbox
+								value="@load(vm.jetDetail.lostTime) @save(fx.lostTime,before={'save'})"
+								readonly="true" cols="2"
+								constraint="no empty : Tidak Boleh Kosong" />
+						</listcell>
+						<listcell>
+							<combobox id="cmbLvl1"
+								model="@load(vm.lvl1Problems)" readonly="true"
+								selectedItem="@bind(vm.tblKctMstProblem)"
+								onOpen="@command('onOpenLevel1')"
+								value="@load(vm.jetDetail.tblKctMstProblem.problemName)"
+								onSelect="@command('onSelectLvl1')">
+								<template name="model">
+									<comboitem
+										label="@load(each.problemName)" />
+								</template>
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox id="cmbLvl2"
+								model="@load(vm.lvl2ProblemModels)"
+								selectedItem="@save(vm.tblKctMstProblem)"
+								onSelect="@command('onSelectLvl2')" readonly="true"
+								value="@load(vm.jetDetail.tblKctMstProblem2.problemName)">
+								<template name="model">
+									<comboitem
+										label="@load(each.problemName)" />
+								</template>
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox
+								model="@load(vm.lvl3ProblemModels)" readonly="true" id="cmbLvl3"
+								selectedItem="@save(vm.tblKctMstProblem)"
+								value="@load(vm.jetDetail.tblKctMstProblem3.problemName)"
+								constraint=" no empty: Tidak Boleh Kosong"
+								onSelect="@command('onSelectLvl3')">
+								<template name="model">
+									<comboitem
+										label="@load(each.problemName)"
+										value="@load(each.problemCode)" />
+								</template>
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<textbox multiline="true"
+								value="@bind(vm.jetDetail.note)" maxlength="200" width="100%"
+								height="30px" />
+						</listcell>
+					</listitem>
+				</listbox>
+			</hbox>
+		</groupbox>
+
+		<separator />
+
+		<groupbox>
+			<caption label="List Data" />
+
+			<radiogroup id="radio" children="@load(vm.jetPlans)"
+				orient="horizontal">
+				<template name="children">
+					<radio label="@load(each.pk.lineCode)"
+						sclass="radio-inline"
+						onCheck="@command('onCheckRadio', me = self)" />
+					<space />
+				</template>
+			</radiogroup>
+			<radio radiogroup="radio" label="All" sclass="radio-inline"
+				onCheck="@command('onCheckRadio', me = self)" checked="true" />
+
+
+			<listbox model="@load(vm.dtls)" sclass="own"
+				emptyMessage="No Records Found" selectedItem="@bind(vm.jetDetail)"
+				onSelect="@command('onSelectDtlListBox')" mold="paging"
+				pageSize="10">
+				<listhead>
+					<listheader label="Line" width="60px" />
+					<listheader label="Start Time" width="80px" />
+					<listheader label="Stop Time" width="80px" />
+					<listheader label="Lost Time" width="80px" />
+					<listheader label="Level 1" width="150px" />
+					<listheader label="Level 2" />
+					<listheader label="Level 3" />
+					<listheader label="Note" />
+					<listheader label="Created By" width="100px" />
+					<listheader label="Updated By" width="100px" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell label="@load(each.lineCode)" />
+						<listcell label="@load(each.startTime)" />
+						<listcell label="@load(each.stopTime)" />
+						<listcell label="@load(each.lostTime)" />
+						<listcell
+							label="@load(each.tblKctMstProblem.problemName)" />
+						<listcell
+							label="@load(each.tblKctMstProblem2.problemName)" />
+						<listcell
+							label="@load(each.tblKctMstProblem3.problemName)" />
+						<listcell>
+							<textbox value="@bind(each.note)"
+								inplace="true" multiline="true" maxlength="200" width="100%"
+								readonly="true" />
+						</listcell>
+						<listcell label="@load(each.createdBy)" />
+						<listcell label="@load(each.updatedBy)" />
+					</listitem>
+				</template>
+			</listbox>
+		</groupbox>
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

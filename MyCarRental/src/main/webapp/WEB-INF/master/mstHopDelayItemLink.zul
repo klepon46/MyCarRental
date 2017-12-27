@@ -1,0 +1,121 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroMstDelayHopperLinkVM')">
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Master Hopper Delay Link" />
+		</div>
+
+		<separator />
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+		<hbox>
+			<cell width="100px">
+				<label value="Hopper Code" />
+			</cell>
+			<cell>
+				<combobox model="@load(vm.hoppers)"
+					onSelect="@command('onSelectHopper')"
+					selectedItem="@bind(vm.hopper)">
+					<template name="model">
+						<comboitem label="@load(each)"
+							value="@load(each)" />
+					</template>
+				</combobox>
+			</cell>
+		</hbox>
+
+		<groupbox>
+			<caption label="Level 1 to Level 3" />
+
+			<hbox align="center">
+				<!-- LISTBOX LEVEL1 -->
+				<listbox model="@load(vm.levels1)" mold="paging"
+					sclass="own" pageSize="10" pagingPosition="bottom"
+					emptyMessage="No Records Found" width="250px"
+					selectedItem="@bind(vm.selectedProblem1)"
+					onSelect="@command('onSelectProblem1')" height="500px">
+					<listhead>
+						<listheader label="Problem Lvl 1" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell>
+								<label value="@load(each.problemName)" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+
+				<separator />
+				<vbox>
+					<button label="Add" zclass="btn"
+						sclass="btn-primary" width="100px" height="50px"
+						onClick="@command('onClickAddLvl2')"
+						iconSclass="glyphicon glyphicon-plus-sign" />
+					<button label="Remove" zclass="btn"
+						sclass="btn-danger" width="100px" height="50px"
+						onClick="@command('onClickRemoveLvl2')"
+						iconSclass="glyphicon glyphicon-remove-sign" />
+				</vbox>
+
+				<separator />
+
+				<!-- LISTBOX LEVEL2 -->
+				<listbox model="@load(vm.levels2)" mold="paging"
+					sclass="own" pageSize="10" pagingPosition="bottom"
+					emptyMessage="No Records Found" width="250px" height="500px"
+					selectedItem="@bind(vm.selectedProblem2)"
+					onSelect="@command('onSelectProblem2')">
+					<listhead>
+						<listheader label="Problem Lvl 2" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell>
+								<label value="@load(each.problemName)" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+
+				<separator />
+
+				<vbox>
+					<button label="Add" zclass="btn"
+						sclass="btn-primary" width="100px" height="50px"
+						onClick="@command('onClickAddLvl3')"
+						iconSclass="glyphicon glyphicon-plus-sign" />
+					<button label="Remove" zclass="btn"
+						sclass="btn-danger" width="100px" height="50px"
+						onClick="@command('onClickRemoveLvl3')"
+						iconSclass="glyphicon glyphicon-remove-sign" />
+				</vbox>
+				<separator />
+
+				<!-- LISTBOX LEVEL3 -->
+				<listbox model="@load(vm.levels3)" mold="paging"
+					sclass="own" pageSize="10" pagingPosition="bottom"
+					emptyMessage="No Records Found" width="250px" height="500px"
+					selectedItem="@bind(vm.selectedProblem3)">
+					<listhead>
+						<listheader label="Problem Lvl 3" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell>
+								<label value="@load(each.problemName)" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+
+			</hbox>
+		</groupbox>
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

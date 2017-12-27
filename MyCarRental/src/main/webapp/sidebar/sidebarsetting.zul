@@ -1,0 +1,5 @@
+<div id="sidebar" sclass="sidebar"
+	apply="com.advvic.funding.viewmodel.SidebarSettingVM">
+	<!-- Navigation List -->
+	<navbar id="navbar1" sclass="nav-list" orient="vertical"></navbar>
+</div>

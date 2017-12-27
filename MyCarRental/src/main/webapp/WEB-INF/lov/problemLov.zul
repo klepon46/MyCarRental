@@ -1,0 +1,37 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="win" title="Problem LOV"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.lov.ProblemLovVM')"
+		border="normal" mode="modal" closable="true" width="80%"
+		contentStyle="overflow: auto">
+
+		<div style="text-align: right;">
+			<bandbox onOK="@command('searchAll', search = self.value)"
+				placeholder="Press Enter to Search..."
+				onChanging="@command('onChanging')" />
+		</div>
+
+		<separator />
+
+		<listbox model="@load(vm.listProblem)" mold="paging"
+			pageSize="10" pagingPosition="bottom"
+			selectedItem="@bind(vm.selectedProblem)" sclass="own">
+			<listhead>
+				<listheader label="Problem Name" />
+				<listheader label="Problem Level" />
+				<listheader label="Assigned" />
+			</listhead>
+			<template name="model">
+				<listitem
+					onDoubleClick="@command('onDoubleClick', win = win)">
+					<listcell label="@load(each.problemName)" />
+					<listcell label="@load(each.problemLevel)" />
+					<listcell
+						label="@load(each.problemParent ne null ? 'Yes':'No')" />
+				</listitem>
+			</template>
+		</listbox>
+
+	</window>
+</zk>

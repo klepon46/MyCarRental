@@ -1,0 +1,34 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="win" title="User Registration"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.fatin.lov.UserRegLov')"
+		border="normal" mode="modal" closable="true" width="50%"
+		contentStyle="overflow: auto">
+
+
+		<vlayout>
+
+			<hbox>
+				<cell width="100px">User Name :</cell>
+
+				<cell>
+					<textbox value="@save(vm.user.userName)" />
+				</cell>
+			</hbox>
+
+			<hbox>
+				<cell width="100px">Password :</cell>
+
+				<cell>
+					<textbox value="@save(vm.user.password)"
+						type="password" />
+				</cell>
+			</hbox>
+		</vlayout>
+
+		<button sclass="btn-success pull-right" zclass="btn"
+			label="Save" onClick="@command('saveUser', win = win)" />
+
+	</window>
+</zk>

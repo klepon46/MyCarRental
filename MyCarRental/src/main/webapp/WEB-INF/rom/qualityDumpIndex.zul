@@ -1,0 +1,43 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroQualityDumpIndexVM')">
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Total Quality Dump To Kelanis" />
+		</div>
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+		<hlayout>
+			<chart model="@load(vm.categoryModelKrom)"
+				engine="@bind(vm.chartEngine)" orient="vertical" type="bar"
+				fgAlpha="200" paneColor="#ffffff" bgColor="#ffffff" threeD="true"
+				height="300" title="@load(vm.kromChartTitle)"
+				onClick="@command('showLovKrom', msg = event.areaComponent.tooltiptext)"
+				hflex="5" />
+
+			<separator />
+
+			<chart model="@load(vm.categoryModelHopper)"
+				engine="@bind(vm.chartEngine)" orient="vertical" type="bar"
+				fgAlpha="200" paneColor="#ffffff" bgColor="#ffffff" threeD="true"
+				height="300" title="@load(vm.hopperChartTitle)"
+				onClick="@command('showLovHopper', msg = event.areaComponent.tooltiptext)"
+				hflex="5" />
+		</hlayout>
+		<separator height="20px" />
+
+		<div style="text-align: center">
+			<chart model="@load(vm.categoryModelPerHopper)"
+				engine="@bind(vm.chartEngine)" orient="vertical" type="bar"
+				fgAlpha="200" paneColor="#ffffff" bgColor="#ffffff" threeD="true"
+				height="300" title="@load(vm.hopperPerCharTitle)" hflex="5"
+				onClick="@command('showLovPerHopper', msg = event.areaComponent.tooltiptext)"
+				width="1000" />
+		</div>
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

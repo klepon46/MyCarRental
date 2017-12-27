@@ -1,0 +1,225 @@
+<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroHomePageVM')">
+
+	<div sclass="container-fluid">
+
+		<div sclass="page-header">
+			<label value="Dashboard" />
+			<a label="Beta Version"
+				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
+		</div>
+
+		<div sclass="row" xmlns:n="native">
+			<div sclass="col-md-7">
+				<groupbox>
+					<caption label="Plant Status" />
+					<n:canvas id="myCanvas"
+						style="width:100%; height:250px"
+						resize="true">
+
+					</n:canvas>
+				</groupbox>
+
+			</div>
+			
+			<div sclass="col-md-5">
+				<groupbox>
+					<caption label="Production Year To Date" />
+					<n:div id="chartYtd"
+						style="height: 300px; width: 100%;" />
+				</groupbox>
+
+			</div>
+		</div>
+		
+		<div sclass="row">
+			<div sclass="col-md-6">
+				<groupbox>
+					<caption label="Weather Info" />
+
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+
+						</div>
+						<div class="panel-body">
+							<grid>
+								<columns>
+									<column width="100px"></column>
+									<column></column>
+									<column width="150px"></column>
+									<column></column>
+									<column width="100px"></column>
+									<column></column>
+								</columns>
+								<rows>
+									<row>
+										<label value="Location : " />
+										<label
+											value="@load(vm.weather.location)" />
+										<label value="Weather : " />
+										<label
+											value="@load(vm.weather.weather)" />
+										<label value="Temperature : " />
+										<div>
+											<label
+												value="@load(vm.weather.temperature)" />
+											C
+										</div>
+									</row>
+
+									<row>
+										<label value="Wind Speed :" />
+										<div>
+											<label
+												value="@load(vm.weather.windSpeed)" />
+											Km/h
+										</div>
+										<label value="Wind Direction :" />
+										<label
+											value="@load(vm.weather.windDirection)" />
+									</row>
+								</rows>
+							</grid>
+						</div>
+					</div>
+				</groupbox>
+			</div>
+
+
+			<div sclass="col-md-6">
+				<groupbox>
+					<caption label="Production Status" />
+					<listbox sclass="own-red">
+						<listhead>
+							<listheader label="Line" />
+							<listheader label="Plan" />
+							<listheader label="Actual" />
+						</listhead>
+						<listitem>
+							<listcell label="Shipping" />
+							<listcell
+								label="@load(vm.todayPlan) @converter('formatedNumber',format='#,###')" />
+							<listcell
+								label="@load(vm.todayActual) @converter('formatedNumber',format='#,###')" />
+						</listitem>
+						<listitem>
+							<listcell label="Crushing" />
+							<listcell
+								label="@load(vm.todayPlanCrushing) @converter('formatedNumber',format='#,###')" />
+							<listcell
+								label="@load(vm.todayActualCrushing) @converter('formatedNumber',format='#,###')" />
+						</listitem>
+						<listitem>
+							<listcell label="Hauling" />
+							<listcell
+								label="@load(vm.planHaulingCargo) @converter('formatedNumber',format='#,###')" />
+							<listcell
+								label="@load(vm.actualHaulingcargo/1000) @converter('formatedNumber',format='#,###')" />
+						</listitem>
+					</listbox>
+				</groupbox>
+			</div>
+
+		</div>
+
+		<div sclass="row">
+			<div sclass="col-md-3">
+				<groupbox>
+					<caption label="Stockpile Status" />
+					<listbox model="@load(vm.stockpiles)" sclass="own"
+						emptyMessage="No Records Found">
+						<listhead>
+							<listheader label="Product" />
+							<listheader label="Tonnage" />
+						</listhead>
+						<template name="model">
+							<listitem>
+								<listcell label="@load(each[0])" />
+								<listcell
+									label="@load(each[1]) @converter('formatedNumber', format='#,###')" />
+							</listitem>
+						</template>
+					</listbox>
+				</groupbox>
+			</div>
+
+			<div sclass="col-md-9">
+				<groupbox>
+					<caption label="Truck Passed 29" />
+					<n:div id="pass29"
+						style="height: 300px; width: 100%;" />
+				</groupbox>
+			</div>
+		</div>
+
+		<div sclass="row">
+			<div sclass="col-md-3">
+				<groupbox>
+					<caption label="Jetty Status" />
+					<listbox model="@load(vm.barges)" sclass="own-blue"
+						emptyMessage="No Records Found">
+						<listhead>
+							<listheader label="Barge" />
+							<listheader label="Jetty" />
+							<listheader label="Capacity" />
+						</listhead>
+						<template name="model">
+							<listitem>
+								<listcell label="@load(each.bargeName)" />
+								<listcell label="@load(each.jetty)" />
+								<listcell
+									label="@load(each.bargeCap) @converter('formatedNumber',format='#,###')" />
+							</listitem>
+						</template>
+					</listbox>
+				</groupbox>
+			</div>
+
+			<div sclass="col-md-3">
+				<groupbox>
+					<caption label="Tug/Barge Status" />
+					<listbox model="@load(vm.bargeInArea)"
+						sclass="own-orange" emptyMessage="No Records Found" mold="paging"
+						pageSize="5">
+						<listhead>
+							<listheader label="Position" />
+							<listheader label="Down" />
+							<listheader label="Up" />
+						</listhead>
+						<template name="model">
+							<listitem>
+								<listcell label="@load(each[0])" />
+								<listcell label="@load(each[1])" />
+								<listcell label="@load(each[2])" />
+							</listitem>
+						</template>
+					</listbox>
+				</groupbox>
+			</div>
+
+			<div sclass="col-md-6">
+				<groupbox>
+					<caption label="Pit Stock Rom" />
+					<n:div id="romMine"
+						style="height: 300px; width: 100%;" />
+				</groupbox>
+			</div>
+		</div>
+
+		<div sclass="row">
+			<div sclass="col-md-6">
+
+			</div>
+		</div>
+
+	</div>
+	<timer delay="60000" repeats="true" onTimer="@command('onTimer')" />
+	<script type="text/javascript" src="/js/chartRomMine.js"></script>
+	<script type="text/javascript" src="/js/chartTruckFrom29.js"></script>
+	<script type="text/javascript" src="js/chartYtd.js"></script>
+	<script type="text/javascript" src="/js/raph.js"></script>
+	<script type="text/javascript" src="/js/canvasjs.min.js"></script>
+	<script type="text/javascript" src="js/paper-full.min.js"></script>
+	<script type="text/javascript" src="js/our_script_dashboard.js"></script>
+</vlayout>

@@ -1,0 +1,82 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroMstUserRoleVM')">
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Master User Role" />
+		</div>
+
+		<separator />
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+		<hbox>
+			<!-- USER LISTBOX -->
+			<listbox model="@load(vm.users)" mold="paging"
+				sclass="own-red" pageSize="10" pagingPosition="bottom"
+				emptyMessage="No Records Found" height="500px" width="450px"
+				checkmark="true" selectedItem="@bind(vm.selectedUser)"
+				onSelect="@command('onSelectUser')">
+				<listhead>
+					<listheader label="Account Name" />
+					<listheader label="User Name" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell>
+							<label value="@load(each.accountName)" />
+						</listcell>
+						<listcell>
+							<label value="@load(each.userName)" />
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+			<separator />
+
+			<vbox>
+
+				<div>
+					<combobox model="@load(vm.roles)"
+						selectedItem="@save(vm.selectedRole)">
+						<template name="model">
+							<comboitem label="@load(each.roleName)"
+								value="@load(each.roleName)" />
+						</template>
+					</combobox>
+					<space />
+					<button label="Add" zclass="btn"
+						sclass="btn-success" iconSclass="glyphicon glyphicon-plus"
+						onClick="@command('addRole')" />
+				</div>
+				<separator />
+
+				<listbox emptyMessage="No Records Found" mold="paging"
+					pageSize="5" sclass="own-blue" model="@load(vm.userRoles)">
+					<listhead>
+						<listheader label="Role" />
+						<listheader label="Description" />
+						<listheader />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.pk.userRole)" />
+							<listcell
+								label="@load(each.tblKctMstRole.roleDescription)" />
+							<listcell>
+								<button label="Remove"
+									sclass="btn-warning pull-right" zclass="btn"
+									iconSclass="glyphicon glyphicon-remove"
+									onClick="@command('removeRole', me =each)" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+			</vbox>
+		</hbox>
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

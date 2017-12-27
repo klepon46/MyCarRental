@@ -1,0 +1,10 @@
+<vlayout sclass="page-content" xmlns:n="native" spacing="0">
+
+	<window closable="false" border="normal"
+		sclass="alert alert-danger">
+		<caption>
+			<label value="Sorry, Page Under Construction" />
+		</caption>
+	</window>
+	<separator height="500px" />
+</vlayout>

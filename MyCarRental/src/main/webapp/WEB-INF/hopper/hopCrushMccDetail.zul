@@ -1,0 +1,194 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroHopCrushHeaderVM')"
+		form="@id('fx') @init(vm.form) @load(vm.tblKctHopCrushDtl) @save(vm.tblKctHopCrushDtl, before='save')">
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="@load(vm.formDetailTitle)" />
+		</div>
+
+		<hlayout>
+			<button label="Back" sclass="btn-danger" zclass="btn"
+				iconSclass="glyphicon glyphicon-chevron-left"
+				onClick="@command('back')" height="30px" width="100px" />
+
+			<button label="Add New" onClick="@command('addNewEntry')"
+				sclass="btn-warning" zclass="btn"
+				iconSclass="glyphicon glyphicon-plus" height="30px" width="100px" />
+
+			<button label="Delete" onClick="@command('delete')"
+				sclass="btn-info" zclass="btn"
+				iconSclass="glyphicon glyphicon-remove" height="30px" width="100px" />
+
+			<button label="Save"
+				onClick="@command('save', cmbLvl1 = cmbLvl1,cmbLvl2 = cmbLvl2,cmbLvl3 = cmbLvl3)" sclass="btn-success"
+				zclass="btn" iconSclass="glyphicon glyphicon-floppy-disk"
+				height="30px" width="100px" />
+
+		</hlayout>
+
+		<separator />
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+
+		<groupbox>
+			<caption label="Time Consumption" />
+
+			<hbox>
+				<listbox sclass="own-blue" mold="paging" pageSize="10">
+					<listhead>
+						<listheader label="Hopper" width="80px" />
+						<listheader label="Stop Time" width="130px" />
+						<listheader label="Start Time" width="130px" />
+						<listheader label="Lost Time" width="100px" />
+						<listheader label="Level 1" />
+						<listheader label="Level 2" />
+						<listheader label="Level 3" />
+						<listheader label="Note" />
+					</listhead>
+					<listitem sclass="task-blue" width="200px">
+						<listcell>
+							<combobox model="@load(vm.hoppers)"
+								value="@load(vm.tblKctHopCrushDtl.hopperCode) @save(fx.hopperCode, before='save')"
+								onSelect="@command('onSelectHopper')"
+								selectedItem="@save(vm.selectedHopper)" readonly="true"
+								constraint="no empty : Tidak Boleh Kosong" width="65px">
+								<template name="model">
+									<comboitem label="@load(each)" />
+								</template>
+							</combobox>
+						</listcell>
+						<listcell>
+							<timebox format="HH:mm"
+								value="@bind(vm.startTimex)" id="startTimeBox"
+								onChange="@command('onChangeTime')" />
+						</listcell>
+						<listcell>
+							<timebox format="HH:mm"
+								value="@load(vm.stopTimex) @save(fx.stopTime)"
+								onCreate="@command('onCreateStopTime', me = self, startBox = startTimeBox)"
+								onChange="@command('onChangeTime')" />
+						</listcell>
+						<listcell>
+							<textbox
+								value="@load(vm.tblKctHopCrushDtl.lostTime) @save(fx.lostTime,before={'onOpenLevel1','save'})"
+								readonly="true" cols="2"
+								constraint="no empty : Tidak Boleh Kosong" />
+						</listcell>
+						<listcell>
+							<combobox id="cmbLvl1" model="@load(vm.lvl1Problems)"
+								readonly="true" selectedItem="@bind(vm.tblKctMstProblem)"
+								onOpen="@command('onOpenLevel1')"
+								value="@load(vm.tblKctHopCrushDtl.tblKctMstProblem.problemName) @save(vm.selectedProblem1)"
+								onSelect="@command('onSelectLvl1')">
+								<template name="model">
+									<comboitem
+										label="@load(each.problemName)" />
+								</template>
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox model="@load(vm.lvl2Problems)"
+								id="cmbLvl2" selectedItem="@bind(vm.tblKctMstProblem)"
+								onSelect="@command('onSelectLvl2')" readonly="true"
+								value="@load(vm.tblKctHopCrushDtl.tblKctMstProblem2.problemName)">
+								<template name="model">
+									<comboitem
+										label="@load(each.problemName)" />
+								</template>
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox model="@load(vm.lvl3Problems)"
+								id="cmbLvl3" readonly="true"
+								selectedItem="@bind(vm.tblKctMstProblem)"
+								value="@load(vm.tblKctHopCrushDtl.tblKctMstProblem3.problemName)"
+								constraint=" no empty: Tidak Boleh Kosong"
+								onSelect="@command('onSelectLvl3')">
+								<template name="model">
+									<comboitem
+										label="@load(each.problemName)"
+										value="@load(each.problemCode)" />
+								</template>
+							</combobox>
+							<!-- OLD COMBO BOX -->
+							<!-- 							<combobox model="@load(vm.lvl3Problems)" -->
+							<!-- 								readonly="true" selectedItem="@bind(vm.tblKctMstProblem)" -->
+							<!-- 								value="@load(vm.tblKctHopCrushDtl.tblKctMstProblem3.problemName) @save(fx.lvl3Problem)" -->
+							<!-- 								constraint=" no empty: Tidak Boleh Kosong" -->
+							<!-- 								onSelect="@command('onSelectLvl3', me = self)"> -->
+							<!-- 								<template name="model"> -->
+							<!-- 									<comboitem -->
+							<!-- 										label="@load(each.problemName)" value="@load(each.problemCode)"/> -->
+							<!-- 								</template> -->
+							<!-- 							</combobox> -->
+						</listcell>
+						<listcell>
+							<textbox multiline="true"
+								value="@bind(vm.tblKctHopCrushDtl.note)" maxlength="200"
+								width="100%" height="45px" />
+						</listcell>
+					</listitem>
+				</listbox>
+			</hbox>
+		</groupbox>
+
+		<separator />
+
+		<groupbox>
+			<caption label="List Data" />
+
+			<listbox model="@load(vm.dtls)" sclass="own"
+				emptyMessage="No Records Found"
+				selectedItem="@bind(vm.tblKctHopCrushDtl)"
+				onSelect="@command('onSelectDtlListBox')" mold="paging"
+				pageSize="10" pagingPosition="bottom">
+				<listhead>
+					<listheader label="Hopper" width="60px"
+						sort="auto(hopperCode)" />
+					<listheader label="Stop Time" width="80px"
+						sort="auto(startTime)" />
+					<listheader label="Start Time" width="80px"
+						sort="auto(stopTime)" />
+					<listheader label="Lost Time" width="80px" />
+					<listheader label="Level 1" width="150px" />
+					<listheader label="Level 2" />
+					<listheader label="Level 3" />
+					<listheader label="Note" />
+					<listheader label="Created By" width="100px" />
+					<listheader label="Updated By" width="100px" />
+					<listheader label="Shift" width="50px"
+						sort="auto(shift)" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell label="@load(each.hopperCode)" />
+						<listcell label="@load(each.startTime)" />
+						<listcell label="@load(each.stopTime)" />
+						<listcell label="@load(each.lostTime)" />
+						<listcell
+							label="@load(each.tblKctMstProblem.problemName)" />
+						<listcell
+							label="@load(each.tblKctMstProblem2.problemName)" />
+						<listcell
+							label="@load(each.tblKctMstProblem3.problemName)" />
+						<listcell>
+							<textbox value="@bind(each.note)"
+								inplace="true" multiline="true" maxlength="200" width="100%"
+								readonly="true" height="45px" />
+						</listcell>
+						<listcell label="@load(each.createdBy)" />
+						<listcell label="@load(each.updatedBy)" />
+						<listcell label="@load(each.shift)" />
+					</listitem>
+				</template>
+			</listbox>
+		</groupbox>
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

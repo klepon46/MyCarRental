@@ -1,0 +1,47 @@
+h2, h3{
+	color: white;
+}
+
+h1{
+	font-size: 60px;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.white{
+	color: white;	
+}
+
+.white{
+	color: black;	
+}
+
+@font-face {
+	font-family: bauhaus;
+	src:url(fonts/BAUHAUSL.tff);
+}
+
+
+.table th, .table td {
+    border: 1px !important;
+}
+
+body{
+	text-shadow:1px 1px 1px rgba(0,0,0,0.004) !important;
+}
+
+tr{
+	line-height: 25px;
+	min-height: 25px;
+	height: 25px;
+}
+
+.gradient{
+	background: rgba(0, 153, 51, 0.7);
+	/*background: -moz-radial-gradient(center, ellipse cover, rgba(162,221,146,1) 0%, rgba(137,209,117,1) 41%, rgba(99,191,74,1) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(162,221,146,1)), color-stop(41%, rgba(137,209,117,1)), color-stop(100%, rgba(99,191,74,1)));
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(162,221,146,1) 0%, rgba(137,209,117,1) 41%, rgba(99,191,74,1) 100%);
+	background: -o-radial-gradient(center, ellipse cover, rgba(162,221,146,1) 0%, rgba(137,209,117,1) 41%, rgba(99,191,74,1) 100%);
+	background: -ms-radial-gradient(center, ellipse cover, rgba(162,221,146,1) 0%, rgba(137,209,117,1) 41%, rgba(99,191,74,1) 100%);
+	background: radial-gradient(ellipse at center, rgba(162,221,146,1) 0%, rgba(137,209,117,1) 41%, rgba(99,191,74,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a2dd92', endColorstr='#63bf4a', GradientType=1 );*/
+}

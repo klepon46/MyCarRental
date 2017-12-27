@@ -1,0 +1,84 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroMstUserVM')">
+
+		<style src="css/own.css" />
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Master User KCT" />
+		</div>
+
+
+		<div sclass="container-fluid">
+			<div sclass="row">
+
+				<div sclass="col-md-5">
+					<groupbox>
+						<caption label="All Users List" />
+						<textbox sclass="form-control"
+							placeholder="Search Name Here" onOK="@command('onOkSearch')"
+							value="@save(vm.searchVal)" />
+
+						<separator />
+
+						<listbox model="@load(vm.employees)"
+							sclass="own-blue" emptyMessage="No Records Found" mold="paging"
+							pageSize="10" pagingPosition="bottom"
+							selectedItem="@save(vm.hlpEmployee)" checkmark="true">
+							<listhead>
+								<listheader label="Account Name" />
+								<listheader label="User Name" />
+							</listhead>
+							<template name="model">
+								<listitem>
+									<listcell
+										label="@load(each.accountName)" />
+									<listcell
+										label="@load(each.userName)" />
+								</listitem>
+							</template>
+						</listbox>
+					</groupbox>
+
+				</div>
+
+				<div sclass="col-md-2" height="100%">
+					<vbox style="margin-top:100%; margin-left:25%">
+						<button label="Add" sclass="btn-success"
+							zclass="btn" onClick="@command('addUser')"
+							iconSclass="glyphicon glyphicon-plus" width="100px" />
+						<button label="Remove" sclass="btn-danger"
+							zclass="btn" onClick="@command('removeUser')"
+							iconSclass="glyphicon glyphicon-remove" width="100px" />
+					</vbox>
+				</div>
+
+				<div sclass="col-md-5">
+					<groupbox>
+						<caption label="Registered Users" />
+						<listbox model="@load(vm.users)"
+							sclass="own-red" mold="paging" pageSize="10"
+							pagingPosition="bottom" emptyMessage="No Records Found"
+							checkmark="true" selectedItem="@bind(vm.selectedUser)">
+							<listhead>
+								<listheader label="Account Name" />
+								<listheader label="User Name" />
+							</listhead>
+							<template name="model">
+								<listitem>
+									<listcell
+										label="@load(each.accountName)" />
+									<listcell
+										label="@load(each.userName)" />
+								</listitem>
+							</template>
+						</listbox>
+					</groupbox>
+
+				</div>
+			</div>
+		</div>
+	</vlayout>
+</zk>

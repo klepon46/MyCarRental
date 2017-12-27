@@ -1,0 +1,123 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroDraftSurveyVM')"
+		form="@id('fx') @load(vm.tblKctDraftSvy) @save(vm.tblKctDraftSvy, before='save')">
+
+		<style src="css/own.css" />
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Outloading Draught Input" />
+		</div>
+
+
+		<div>
+
+			<button label="Add New" onClick="@command('addNewEntry')"
+				sclass="btn-warning" zclass="btn"
+				iconSclass="glyphicon glyphicon-plus" height="30px" width="100px" />
+
+			<button label="Save" onClick="@command('save')"
+				sclass="btn-success" zclass="btn"
+				iconSclass="glyphicon glyphicon-floppy-disk" height="30px"
+				width="100px" />
+
+			<div style="float: right">
+				<label value="Total Produksi " sclass="fontMe" />
+				<label
+					value="@load(vm.totalDraught) @converter('formatedNumber',format='###,###')"
+					sclass="fontMe textGreen" />
+			</div>
+		</div>
+
+		<!-- END OF HEADER AREA -->
+
+		<separator height="20px" />
+
+		<hlayout>
+			<div hflex="2">
+				<groupbox>
+
+					<hbox align="center">
+						<cell width="50px">
+							<label value="Tanggal" />
+						</cell>
+
+						<cell>
+							<datebox
+								onChange="@command('onChangeDateBox')" value="@bind(vm.date)" />
+						</cell>
+					</hbox>
+
+					<separator />
+
+					<hbox align="center">
+						<cell width="50px">
+							<label value="Draft" />
+						</cell>
+
+						<cell>
+							<doublebox value="@bind(fx.draft)"
+								format="#,###" constraint="no empty:Tidak Boleh Kosong" />
+						</cell>
+					</hbox>
+
+					<separator />
+
+					<hbox align="center">
+						<cell width="50px">
+							<label value="Shift" />
+						</cell>
+
+						<cell>
+							<combobox value="@bind(fx.shift)"
+								disabled="@load(vm.comboDisabled)" readonly="true"
+								constraint="no empty:Tidak Boleh Kosong">
+								<comboitem label="1" value="1" />
+								<comboitem label="2" value="2" />
+							</combobox>
+						</cell>
+					</hbox>
+				</groupbox>
+			</div>
+
+			<div hflex="8">
+				<listbox emptyMessage="No Records Found" sclass="own"
+					model="@load(vm.surveys)" mold="paging" pageSize="10"
+					selectedItem="@bind(vm.tblKctDraftSvy)"
+					onSelect="@command('onSelectListbox')">
+					<listhead>
+						<listheader label="ID Draft" />
+						<listheader label="Draft" />
+						<listheader label="Shift" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell>
+								<label value="@load(each.idProd)" />
+							</listcell>
+
+							<listcell>
+								<label
+									value="@load(each.draft) @converter('formatedNumber',format='#,###')" />
+							</listcell>
+
+							<listcell>
+								<label value="@load(each.shift)" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+			</div>
+
+		</hlayout>
+
+		<!-- CONTENT AREA -->
+
+
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

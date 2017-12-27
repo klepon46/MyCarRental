@@ -1,0 +1,32 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Dump Detail" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.lov.QualityDumpLovVM')"
+		border="normal" mode="modal" closable="true" width="50%" height="70%"
+		contentStyle="overflow: auto">
+
+		<listbox model="@bind(vm.dumps)" sclass="own">
+			<listhead>
+				<listheader label="Truck No" />
+				<listheader label="Material Kode"/>
+				<listheader label="Grade" />
+				<listheader label="Destination" />
+				<listheader label="Tonnage" />
+				<listheader label="CV"/>
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.truckNo)" />
+					<listcell label="@load(each.materialKode)"/>
+					<listcell label="@load(each.seriesNameToString)" />
+					<listcell label="@load(each.destinationKode)" />
+					<listcell
+						label="@load(each.totalNetDump) @converter('formatedNumber', format='###,###.00')" />
+					<listcell label="@load(each.calofatic) @converter('formatedNumber', format='###,###.00')"/>
+				</listitem>
+			</template>
+		</listbox>
+		<paging totalSize="@load(vm.pageSize)" pageSize="10" onCreate="@command('onCreatePaging', me = self)"/>
+
+	</window>
+</zk>

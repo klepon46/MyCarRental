@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk>
+	<!-- [Optional] Uncomment if you want to defines the application's name 
+		<preference> <name>org.zkoss.zk.ui.WebApp.name</name> <value>KelanisProject</value> 
+		</preference> -->
+
+	<!-- <library-property> -->
+	<!-- <name>org.zkoss.zul.listbox.rod</name> -->
+	<!-- <value>true</value> -->
+	<!-- </library-property> -->
+
+	<!-- BIAR TIDAK MUNCUL PESAN ERROR !ASYCNSUPPORTED DI JETTY9 -->
+	<library-property>
+		<name>org.zkoss.zkmax.ui.comet.async.disabled</name>
+		<value>true</value>
+	</library-property>
+	<device-config>
+		<device-type>ajax</device-type>
+		<server-push-class>org.zkoss.zkmax.ui.comet.CometServerPush
+		</server-push-class>
+	</device-config>
+
+	<session-config>
+		<!-- satuannya detik -->
+		<session-timeout>3600</session-timeout>
+		<timer-keep-alive>true</timer-keep-alive>
+	</session-config>
+</zk>

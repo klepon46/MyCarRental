@@ -1,0 +1,91 @@
+<?page title="KCT" contentType="text/html;charset=UTF-8"?>
+<?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+<!-- <?init class="com.adaro.kelanis.utl.AdrLoginInterceptor" ?> -->
+
+<div xmlns:x="zul" xmlns:zk="zk" xmlns:k="xhtml" sclass="gradient"
+	width="100%" height="100%">
+
+	<style src="bootstrap/css/myCss.css" />
+
+	<div sclass="container-fluid">
+
+		<!-- HEADER -->
+		<div class="row" style="margin-bottom:1cm">
+			<div class="col-md-12 text-center">
+				<k:h2>Car Rental Portal</k:h2>
+			</div>
+			<div class="col-md-12 text-center">
+				<k:h3>
+
+				</k:h3>
+			</div>
+		</div>
+
+
+
+		<!-- LOGIN -->
+		<div class="row" style="margin-top: 1cm"
+			apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.fatin.viewmodel.LoginVM')">
+
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel panel-success pull-right">
+					<div class="panel-body">
+						<div class="form-inline">
+							<hbox align="center">
+								<cell width="100px">
+									<label value="User Name" />
+								</cell>
+								<cell>
+									<textbox sclass="form-control"
+										value="@save(vm.user.userName)" placeholder="Username"
+										focus="true" />
+								</cell>
+							</hbox>
+						</div>
+						`
+						<k:br />
+
+						<div class="form-inline">
+
+							<hbox align="center">
+								<cell width="100px">
+									<label style="width:5cm">
+										Password
+									</label>
+								</cell>
+								<cell>
+									<textbox sclass="form-control"
+										value="@save(vm.user.password)" placeholder="Password"
+										type="password" onOK="@command('doLogin')" />
+								</cell>
+							</hbox>
+
+						</div>
+						<k:br />
+
+						<div class="form-inline">
+							<a
+								onClick="@command('showPopupUserRegistration')">
+								User Register
+							</a>
+
+							<a
+								onClick="@command('sendCompanyUsernameRequest')">
+								Company Register
+							</a>
+
+							<button label="Sign In" type="submit"
+								zclass="btn" sclass="btn-info pull-right"
+								onClick="@command('doLogin')" />
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END OF LOGIN -->
+	</div>
+
+</div>

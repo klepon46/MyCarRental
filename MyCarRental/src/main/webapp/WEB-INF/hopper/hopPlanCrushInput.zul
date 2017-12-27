@@ -1,0 +1,123 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroHopPlanCrushInputVM')"
+		form="@id('fx') @load(vm.tblKctHopPlanCrush) @save(vm.tblKctHopPlanCrush, before='save')">
+
+		<style src="css/own.css" />
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Production Target Input" />
+		</div>
+
+
+		<div>
+
+			<button label="Add New" onClick="@command('addNewEntry')"
+				sclass="btn-warning" zclass="btn"
+				iconSclass="glyphicon glyphicon-plus" height="30px" width="100px" />
+
+			<button label="Save" onClick="@command('save')"
+				sclass="btn-success" zclass="btn"
+				iconSclass="glyphicon glyphicon-floppy-disk" height="30px"
+				width="100px" />
+
+			<div style="float: right">
+				<label value="Total Produksi " sclass="fontMe" />
+				<label
+					value="@load(vm.totalPlanCrush) @converter('formatedNumber',format='###,###')"
+					sclass="fontMe textGreen" />
+			</div>
+		</div>
+
+		<!-- END OF HEADER AREA -->
+
+		<separator height="20px" />
+
+		<hlayout>
+			<div hflex="2">
+				<groupbox>
+
+					<hbox align="center">
+						<cell width="50px">
+							<label value="Tanggal" />
+						</cell>
+
+						<cell>
+							<datebox
+								onChange="@command('onChangeDateBox')" value="@bind(vm.date)" />
+						</cell>
+					</hbox>
+
+					<separator />
+
+					<hbox align="center">
+						<cell width="50px">
+							<label value="Tonnage" />
+						</cell>
+
+						<cell>
+							<doublebox value="@bind(fx.tonage)"
+								format="#,###" constraint="no empty:Tidak Boleh Kosong" />
+						</cell>
+					</hbox>
+
+					<separator />
+
+					<hbox align="center">
+						<cell width="50px">
+							<label value="Shift" />
+						</cell>
+
+						<cell>
+							<combobox value="@bind(fx.shift)"
+								disabled="@load(vm.comboDisabled)" readonly="true"
+								constraint="no empty:Tidak Boleh Kosong">
+								<comboitem label="1" value="1" />
+								<comboitem label="2" value="2" />
+							</combobox>
+						</cell>
+					</hbox>
+				</groupbox>
+			</div>
+
+			<div hflex="8">
+				<listbox emptyMessage="No Records Found" sclass="own"
+					model="@load(vm.planCrushs)" mold="paging" pageSize="10"
+					selectedItem="@bind(vm.tblKctHopPlanCrush)"
+					onSelect="@command('onSelectListbox')">
+					<listhead>
+						<listheader label="ID Prod" />
+						<listheader label="Tonnage" />
+						<listheader label="Shift" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell>
+								<label value="@load(each.idProd)" />
+							</listcell>
+
+							<listcell>
+								<label
+									value="@load(each.tonage) @converter('formatedNumber',format='#,###')" />
+							</listcell>
+
+							<listcell>
+								<label value="@load(each.shift)" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+			</div>
+
+		</hlayout>
+
+		<!-- CONTENT AREA -->
+
+
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

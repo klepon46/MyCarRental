@@ -1,0 +1,30 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Dump Per Hopper Detail"
+		apply="org.zkoss.bind.BindComposer" border="normal"
+		viewModel="@id('vm') @init('com.adaro.kelanis.lov.QualityDumpPerHopperLovVM')"
+		mode="modal" closable="true" width="60%" height="55%"
+		contentStyle="overflow: auto">
+
+		<listbox model="@load(vm.dumps)" mold="paging" pageSize="10"
+			pagingPosition="bottom" sclass="own">
+			<listhead>
+				<listheader label="Truck No" />
+				<listheader label="Material Kode" />
+				<listheader label="Dump" />
+				<listheader label="CV" />
+				<listheader label="Date Closed" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.truckNo)" />
+					<listcell label="@load(each.materialKode)" />
+					<listcell label="@load(each.totalNetDump/1000)" />
+					<listcell label="@load(each.calofatic) @converter('formatedNumber', format='###,###.##')" />
+					<listcell label="@load(each.dateClosed)" />
+				</listitem>
+			</template>
+		</listbox>
+
+	</window>
+</zk>

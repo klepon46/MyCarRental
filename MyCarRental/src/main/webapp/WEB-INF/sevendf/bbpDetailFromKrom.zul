@@ -1,0 +1,99 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroBbpHeaderVM')">
+
+		<!-- Header Area -->
+		<div>
+			<n:h3>Barge Blending Plan Info</n:h3>
+		</div>
+
+		<separator />
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+		<groupbox>
+			<caption label="K1" />
+			<listbox model="@load(vm.bbpDetails)" mold="paging"
+				pageSize="10" pagingPosition="bottom"
+				emptyMessage="No Records Found" sclass="own"
+				selectedItem="@bind(vm.bbpDtl)">
+				<listhead>
+					<listheader label="Barge ID" />
+					<listheader label="Barge Name" />
+					<listheader label="ETL" width="200px" />
+					<listheader label="ETC" width="200px" />
+					<listheader label="Product" />
+					<listheader label="Destination" />
+					<listheader label="Jetty" />
+					<listheader label="BLS Time" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell label="@load(each.bargeId)" />
+						<listcell label="@load(each.bargeName)" />
+						<listcell>
+							<label
+								value="@bind(each.startDate) @converter('formatedDate', format='dd-MM-yyyy HH:mm')"
+								width="150px" />
+						</listcell>
+						<listcell>
+							<label
+								value="@bind(each.finishDate) @converter('formatedDate', format='dd-MM-yyyy HH:mm')"
+								width="150px" />
+						</listcell>
+						<listcell label="@load(each.product)" />
+						<listcell label="@load(each.destination)" />
+						<listcell label="@load(each.jetty)" />
+						<listcell
+							label="@load(each.entryTime) @converter('formatedDate',format='dd-MM-yyyy HH:mm')" />
+					</listitem>
+				</template>
+			</listbox>
+		</groupbox>
+
+		<separator />
+
+		<groupbox>
+			<caption label="K3" />
+			<listbox model="@load(vm.bbpDetails2)" mold="paging"
+				pageSize="10" pagingPosition="bottom"
+				emptyMessage="No Records Found" sclass="own"
+				selectedItem="@bind(vm.bbpDtl)">
+				<listhead>
+					<listheader label="Barge ID" />
+					<listheader label="Barge Name" />
+					<listheader label="ETL" width="200px" />
+					<listheader label="ETC" width="200px" />
+					<listheader label="Product" />
+					<listheader label="Destination" />
+					<listheader label="Jetty" />
+					<listheader label="BLS Time" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell label="@load(each.bargeId)" />
+						<listcell label="@load(each.bargeName)" />
+						<listcell>
+							<label
+								value="@bind(each.startDate) @converter('formatedDate', format='dd-MM-yyyy HH:mm')"
+								width="150px" />
+						</listcell>
+						<listcell>
+							<label
+								value="@bind(each.finishDate) @converter('formatedDate', format='dd-MM-yyyy HH:mm')"
+								width="150px" />
+						</listcell>
+						<listcell label="@load(each.product)" />
+						<listcell label="@load(each.destination)" />
+						<listcell label="@load(each.jetty)" />
+						<listcell
+							label="@load(each.entryTime) @converter('formatedDate',format='dd-MM-yyyy HH:mm')" />
+					</listitem>
+				</template>
+			</listbox>
+		</groupbox>
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

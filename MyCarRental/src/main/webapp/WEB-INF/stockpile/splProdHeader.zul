@@ -1,0 +1,120 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroSplProdHeaderVM')"
+		id="vmenu">
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Stockpile To Barge" />
+		</div>
+
+		<hbox>
+			<button sclass="btn-warning" zclass="btn" label="Add New"
+				iconSclass="glyphicon glyphicon-plus" onClick="@command('addNew')" />
+			<button sclass="btn-info" zclass="btn" label="Add/Edit"
+				iconSclass="glyphicon glyphicon-pencil" onClick="@command('edit')" />
+			<button sclass="btn-success" zclass="btn"
+				label="Export To Excel" onClick="@command('toExcel')"
+				iconSclass="glyphicon glyphicon-list-alt" />
+			<button sclass="btn-danger" zclass="btn"
+				label="Export To Pdf" onClick="@command('toPdf')"
+				iconSclass="glyphicon glyphicon-print" />
+		</hbox>
+
+		<div style="text-align: right">
+			<bandbox placeholder="Search..." value="@save(vm.search)"
+				onOK="@command('search')" />
+		</div>
+
+		<separator />
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+
+
+		<!-- TAB PANELS JETTY K1 -->
+		<vbox>
+			<groupbox>
+				<caption label="K1" hflex="5" />
+				<listbox model="@load(vm.prodHeaders)" mold="paging"
+					pageSize="10" pagingPosition="bottom"
+					emptyMessage="No Records Found" sclass="own"
+					selectedItem="@bind(vm.splHeader)" checkmark="true">
+					<listhead>
+						<listheader width="40px" />
+						<listheader label="ID Production" />
+						<listheader label="Jetty Code" />
+						<listheader label="Total Tonnage" />
+						<listheader label="Created Date" />
+						<listheader label="LOV" width="180px" />
+					</listhead>
+					<template name="model">
+						<listitem
+							onDoubleClick="@command('onDoubleClick')">
+							<listcell />
+							<listcell label="@load(each.pk.idProd)" />
+							<listcell label="@load(each.pk.splCode)" />
+							<listcell
+								label="@load(each.totalTonnage) @converter('formatedNumber', format = '###,###')" />
+							<listcell label="@load(each.createdDate)" />
+							<listcell>
+								<button label="Shift 1"
+									sclass="btn-primary" zclass="btn"
+									iconSclass="glyphicon glyphicon-th-list"
+									onClick="@command('onCekDetail', idProd = each.pk.idProd, splCode = each.pk.splCode, shift = 1)" />
+								<button label="Shift 2"
+									sclass="btn-danger" zclass="btn"
+									iconSclass="glyphicon glyphicon-th-list"
+									onClick="@command('onCekDetail', idProd = each.pk.idProd, splCode = each.pk.splCode, shift = 2)" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+				<!-- END OF JETTY K1 -->
+			</groupbox>
+
+			<!-- TAB PANELS JETTY K3 -->
+			<groupbox>
+				<caption label="K3" />
+				<listbox model="@load(vm.prodHeadersK3)" mold="paging"
+					pageSize="10" pagingPosition="bottom"
+					emptyMessage="No Records Found" sclass="own"
+					selectedItem="@bind(vm.splHeader)" checkmark="true">
+					<listhead>
+						<listheader width="40px" />
+						<listheader label="ID Production" />
+						<listheader label="Jetty Code" />
+						<listheader label="Total Tonnage" />
+						<listheader label="Created Date" />
+						<listheader label="LOV" width="180px" />
+					</listhead>
+					<template name="model">
+						<listitem
+							onDoubleClick="@command('onDoubleClick')">
+							<listcell />
+							<listcell label="@load(each.pk.idProd)" />
+							<listcell label="@load(each.pk.splCode)" />
+							<listcell
+								label="@load(each.totalTonnage) @converter('formatedNumber', format = '###,###')" />
+							<listcell label="@load(each.createdDate)" />
+							<listcell>
+								<button label="Shift 1"
+									sclass="btn-primary" zclass="btn"
+									iconSclass="glyphicon glyphicon-th-list"
+									onClick="@command('onCekDetail', idProd = each.pk.idProd, splCode = each.pk.splCode, shift = 1)" />
+								<button label="Shift 2"
+									sclass="btn-danger" zclass="btn"
+									iconSclass="glyphicon glyphicon-th-list"
+									onClick="@command('onCekDetail', idProd = each.pk.idProd, splCode = each.pk.splCode, shift = 2)" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+			</groupbox>
+		</vbox>
+		<!-- END OF JETTY K3 -->
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

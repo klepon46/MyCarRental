@@ -1,0 +1,62 @@
+<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroHomePageVM')">
+	<div sclass="page-header">
+		<label value="Dashboard" />
+		<a label="Beta Version" iconSclass="z-icon-angle-double-right"
+			sclass="subtitle" />
+	</div>
+
+	<window closable="false" border="normal"
+		sclass="alert alert-success">
+		<caption>
+			<vlayout>
+				<label
+					value="Welcome To Kelanis Coal Terminal, This Application is being
+			developed, the available features might change due to the
+			process of development, " />
+				<label
+					value="if you find bug or want to give any
+			feedback please inform it to my email :
+			gusti.arya@ptadaro.com" />
+			</vlayout>
+		</caption>
+	</window>
+
+	<script type="text/javascript" src="/js/raph.js"></script>
+	<script type="text/javascript" src="/js/canvasjs.min.js"></script>
+
+	<tabbox tabscroll="true">
+		<tabs>
+			<tab label="Passing to 29" />
+			<tab id="mineRom" label="Mine ROM" />
+			<tab id="klsRom" label="Kelanis ROM" />
+			<tab id="dumpLoad" label="Dump &amp; load" />
+			<tab id="planPass" label="Plan Vs Actual Passing" />
+		</tabs>
+		<tabpanels>
+			<tabpanel>
+				<script type="text/javascript"
+					src="/js/chartTruckFrom29.js">
+				</script>
+<!-- 				<include src="/WEB-INF/rom/pass29Index.zul" /> -->
+			</tabpanel>
+			<tabpanel fulfill="mineRom.onSelect">
+				<include src="/WEB-INF/rom/romMineIndex.zul" />
+			</tabpanel>
+			<tabpanel fulfill="klsRom.onSelect">
+				<include src="/WEB-INF/rom/romKelanisIndex.zul" />
+			</tabpanel>
+			<tabpanel fulfill="dumpLoad.onSelect">
+				<!-- 				<label value="Under Construction" /> -->
+				<include src="/WEB-INF/rom/qualityDumpIndex.zul" />
+			</tabpanel>
+			<tabpanel fulfill="planPass.onSelect">
+				<include src="/WEB-INF/sevendf/planPass.zul" />
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+
+	<separator bar="true" />
+
+</vlayout>

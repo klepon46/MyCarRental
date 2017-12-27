@@ -1,0 +1,152 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.Adaro7dfPlanInfoVM')">
+
+		<style src="css/own.css" />
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="7DF Plan &amp; Actual Comparison" />
+		</div>
+
+		<!-- 		<div style="text-align: right"> -->
+		<!-- 			<bandbox placeholder="Search ..." sclass="input-prepend" -->
+		<!-- 				onOK="@command('onSearch')" /> -->
+		<!-- 		</div> -->
+
+		<separator />
+
+		<hlayout>
+			<button label="Back" sclass="btn-danger" zclass="btn"
+				iconSclass="glyphicon glyphicon-chevron-left"
+				onClick="@command('back')" height="30px" width="100px" />
+
+			<button label="Export To Excel" sclass="btn-success"
+				zclass="btn" onClick="@command('toExcel')" height="30px"
+				width="150px" iconSclass="glyphicon glyphicon-list-alt" />
+
+		</hlayout>
+		<!-- END OF HEADER AREA -->
+
+		<separator bar="true" />
+
+		<div style="text-align: center">
+			<chart model="@load(vm.categoryModel)"
+				engine="@load(vm.chartEngine)" orient="vertical" type="bar"
+				fgAlpha="200" paneColor="#ffffff" bgColor="#ffffff" threeD="true"
+				width="1000" height="400" title="@load(vm.title)"
+				style="align-text: center" />
+		</div>
+
+
+		<!-- CONTENT AREA -->
+		<panel sclass="transparent" open="true" collapsible="true">
+			<caption label="Plan" />
+			<panelchildren>
+				<listbox
+					model="@load(vm.tblKct7dfPlan.tblKct7dfPlanDtls)" sclass="own">
+					<listhead children="@load(vm.tglList)">
+						<template name="children" var="child">
+							<listheader label="@load(child)" />
+						</template>
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell
+								zclass="@load(each.tblKctMstProduct.color)">
+								<label
+									value="@load(each.tblKctMstProduct.productName)"
+									sclass="fontBold geser-kanan" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(each.day1Plan)"
+									readonly="true" format="###,###" style="text-align: right" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(each.day2Plan)"
+									readonly="true" format="###,###" style="text-align: right" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(each.day3Plan)"
+									readonly="true" format="###,###" style="text-align: right" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(each.day4Plan)"
+									readonly="true" format="###,###" style="text-align: right" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(each.day5Plan)"
+									format="###,###" style="text-align: right" readonly="true" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(each.day6Plan)"
+									format="###,###" style="text-align: right" readonly="true" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(each.day7Plan)"
+									format="###,###" style="text-align: right" readonly="true" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+			</panelchildren>
+		</panel>
+
+		<separator />
+
+		<panel sclass="transparent" open="true" collapsible="true">
+			<caption label="Actual" />
+			<panelchildren>
+				<listbox emptyMessage="No Records Found" sclass="own"
+					model="@load(vm.tblKct7dfPlan.tblKct7dfPlanDtls)" >
+					<listhead children="@load(vm.tglList)">
+						<template name="children">
+							<listheader label="@load(each)" />
+						</template>
+					</listhead>
+					<template name="model" var="p1">
+						<listitem>
+							<listcell
+								zclass="@load(p1.tblKctMstProduct.color)">
+								<label
+									value="@load(p1.tblKctMstProduct.productName)"
+									sclass="fontBold geser-kanan" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(p1.day1Actual)"
+									format="###,###" style="text-align: right" readonly="true" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(p1.day2Actual)"
+									format="###,###" style="text-align: right" readonly="true" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(p1.day3Actual)"
+									format="###,###" style="text-align: right" readonly="true" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(p1.day4Actual)"
+									format="###,###" style="text-align: right" readonly="true" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(p1.day5Actual)"
+									format="###,###" style="text-align: right" readonly="true" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(p1.day6Actual)"
+									format="###,###" style="text-align: right" readonly="true" />
+							</listcell>
+							<listcell>
+								<intbox value="@bind(p1.day7Actual)"
+									format="###,###" style="text-align: right" readonly="true" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+			</panelchildren>
+		</panel>
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

@@ -1,0 +1,56 @@
+<?page id="index" title="Adaro KCT"?>
+<?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+<?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
+<!-- <?taglib uri="/WEB-INF/security.tld" prefix="sec"?> -->
+<?link href="less/index.css.dsp" rel="stylesheet" type="text/css"?>
+
+<zk xmlns:n="native">
+	<div id="divUtama" apply="com.fatin.viewmodel.IndexVM">
+
+		<div id="divNavbar" sclass="navbar">
+			<a label="Car Rental System" sclass="pull-left navbar-brand"
+				iconSclass="z-icon-truck" href="/" />
+			<hlayout id="layout1" sclass="nav-user pull-left"
+				spacing="0">
+			</hlayout>
+
+
+			<hlayout id="layout2" sclass="nav-user pull-right"
+				spacing="0">
+
+				<a id="plan" sclass="light-blue">
+					<label value="Customer Profile" />
+				</a>
+
+				<a id="hopper" sclass="light-blue">
+					<label value="Company Profile" />
+				</a>
+
+				<a id="stockpile" sclass="light-blue">
+					<label value="Admin" />
+				</a>
+
+				<menubar sclass="user-menu light-blue">
+					<menu id="menu"
+						image="assets/avatars/avatar2.png">
+						<menupopup>
+							<!-- <menuitem id="setting" label="Setting"
+								iconSclass="z-icon-cog" />
+								<menuseparator /> -->
+							<menuitem id="logout" label="Log out" />
+						</menupopup>
+					</menu>
+				</menubar>
+			</hlayout>
+
+		</div>
+		<!-- END OF NAVBAR -->
+
+		<hlayout id="main" spacing="0">
+			<vlayout id="vlay" spacing="0" hflex="1">
+				<include id="mainmenu" />
+			</vlayout>
+		</hlayout>
+	</div>
+
+</zk>

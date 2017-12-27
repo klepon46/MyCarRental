@@ -1,0 +1,39 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroRomKelanisIndexVM')">
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Krom Index" />
+		</div>
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+		<!-- Free Chart -->
+		<hlayout>
+			<chart model="@load(vm.categoryModelDumping)"
+				engine="@bind(vm.chartEngine)" orient="vertical" type="bar"
+				fgAlpha="200" paneColor="#ffffff" bgColor="#ffffff" threeD="true"
+				height="300" title="@load(vm.dumpChartTitle)"
+				onClick="@command('showLovDumping', msg = event.areaComponent.tooltiptext)"
+				hflex="5" />
+
+			<chart model="@load(vm.categoryModelLoading)"
+				engine="@bind(vm.chartEngine)" orient="vertical" type="bar"
+				fgAlpha="200" paneColor="#ffffff" bgColor="#ffffff" threeD="true"
+				title="@load(vm.loadChartTitle)" height="300"
+				onClick="@command('showLovLoading', msg=event.areaComponent.tooltiptext)"
+				hflex="5" />
+		</hlayout>
+		
+		<separator bar="true"/>
+		
+		<chart model="@load(vm.categoryModelLatestStock)"
+			engine="@bind(vm.chartEngine)" orient="vertical" type="bar"
+			fgAlpha="200" paneColor="#ffffff" bgColor="#ffffff" threeD="true"
+			title="@load(vm.latestStockChartTitle)"  width="1000" onClick="@command('showLovCurrentStock')"/>
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

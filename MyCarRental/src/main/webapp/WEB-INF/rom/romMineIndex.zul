@@ -1,0 +1,26 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroRomMineIndexVM')">
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Rom Mine Stock" />
+		</div>
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+
+		<!-- PAY -->
+		<!-- 		<charts id="chart" type="column" title="@load(vm.chartText)" -->
+		<!-- 			width="1000" model="@load(vm.categoryModel)" -->
+		<!-- 			onCreate="@command('onCreateChart' , me = self)" /> -->
+
+		<chart type="bar" title="@load(vm.chartText)"
+			model="@bind(vm.categoryModel)" engine="@bind(vm.chartEngine)"
+			paneColor="#ffffff" bgColor="#ffffff" orient="vertical" width="1000"
+			height="400" fgAlpha="200" threeD="true" />
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

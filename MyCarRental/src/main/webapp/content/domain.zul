@@ -1,0 +1,54 @@
+<panel border="none" collapsible="true" sclass="transparent">
+	<caption iconSclass="z-icon-star orange"
+		label="Rincian Angsuran Pembayaran" />
+	<panelchildren>
+		<grid sclass="domain">
+			<columns>
+				<column label="name"
+					iconSclass="z-icon-caret-right blue" />
+				<column label="Tanggal"
+					iconSclass="z-icon-caret-right blue" />
+				<column label="Nominal"
+					iconSclass="z-icon-caret-right blue" />
+				<column label="Keterangan"
+					iconSclass="z-icon-caret-right blue" />
+			</columns>
+			<rows>
+				<row>
+					<label value="Angsuran" />
+					<label value="01-Jan-2014" />
+					<div>
+						<label sclass="green" value="Rp 150.000" />
+					</div>
+					<label value="Lunas" sclass="label label-success" />
+				</row>
+				<row>
+					<label value="Angsuran" />
+					<label value="01-Jan-2014" />
+					<div>
+						<label sclass="green" value="Rp 150.000" />
+					</div>
+					<label value="Lunas" sclass="label label-success" />
+				</row>
+				<row>
+					<label value="Angsuran" />
+					<label value="01-Jan-2014"/>
+					<div>
+						<label sclass="green" value="Rp 150.000" />
+					</div>
+					<label value="Menunggak"
+						sclass="label label-danger" />
+				</row>
+				<row>
+					<label value="Angsuran" />
+					<label value="01-Jan-2014"/>
+					<div>
+						<label sclass="green" value="Rp 150.000" />
+					</div>
+					<label value="Belum Bayar"
+						sclass="label label-warning" />
+				</row>
+			</rows>
+		</grid>
+	</panelchildren>
+</panel>

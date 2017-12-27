@@ -1,0 +1,102 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroJetBargeBeltScaleVM')">
+
+		<style src="css/own.css" />
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="@load(vm.formTitle)" />
+		</div>
+
+		<div>
+			<div>
+				<button label="Back" sclass="btn-danger" zclass="btn"
+					iconSclass="glyphicon glyphicon-chevron-left"
+					onClick="@command('back')" height="30px" width="100px" />
+
+				<button label="Save" onClick="@command('save')"
+					sclass="btn-success" zclass="btn"
+					iconSclass="glyphicon glyphicon-floppy-disk" height="30px"
+					width="100px" />
+			</div>
+		</div>
+
+
+		<separator />
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+		<vlayout>
+			<groupbox>
+				<caption label="BeltScale Value" />
+				<listbox emptyMessage="No Records" sclass="own-red"
+					model="@load(vm.prods)">
+					<listhead>
+						<listheader label="Line" />
+						<listheader label="Start" />
+						<listheader label="Finish" />
+						<listheader label="Total" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell
+								label="@load(each.beltscaleBrgName)" />
+							<listcell>
+								<decimalbox
+									value="@bind(each.tonnageStart)"
+									onChange="@command('onChangeDa', me = each)" format="###,###" />
+							</listcell>
+							<listcell>
+								<decimalbox
+									value="@bind(each.tonnageFinish)"
+									onChange="@command('onChangeDa', me = each)" format="###,###" />
+							</listcell>
+							<listcell>
+								<label
+									value="@load(each.tonnageTotal) @converter('formatedNumber',format='#,###')"
+									style="fontBold" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+			</groupbox>
+
+			<groupbox>
+				<caption label="Reclaim Feeder" />
+
+				<listbox sclass="own-blue" emptyMessage="No Records Found"
+					model="@load(vm.reclaims)">
+					<listhead>
+						<listheader label="Reclaim" />
+						<listheader label="Start 1" />
+						<listheader label="Finish 1" />
+						<listheader label="Start 2" />
+						<listheader label="Finish 2" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.reclaimName)" />
+							<listcell>
+								<timebox value="@bind(each.start1)" format="HH:mm" />
+							</listcell>
+							<listcell>
+								<timebox value="@bind(each.finish1)" format="HH:mm" />
+							</listcell>
+							<listcell>
+								<timebox value="@bind(each.start2)" format="HH:mm"/>
+							</listcell>
+							<listcell>
+								<timebox value="@bind(each.finish2)" format="HH:mm"/>
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+
+			</groupbox>
+		</vlayout>
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

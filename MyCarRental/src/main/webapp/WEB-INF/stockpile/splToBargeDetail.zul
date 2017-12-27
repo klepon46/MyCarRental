@@ -1,0 +1,157 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroSplToBrgHeaderVM')">
+
+		<style src="css/own.css" />
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Stockpile To Barge Input" />
+		</div>
+
+		<hbox>
+			<button label="Back" sclass="btn-danger" zclass="btn"
+				iconSclass="glyphicon glyphicon-chevron-left"
+				onClick="@command('back')" height="30px" width="90px" />
+			<button sclass="btn-warning" zclass="btn" label="Add New"
+				iconSclass="glyphicon glyphicon-plus"
+				onClick="@command('addNewEntry')" />
+			<button sclass="btn-success" zclass="btn" label="Save"
+				iconSclass="glyphicon glyphicon-pencil" onClick="@command('save')" />
+		</hbox>
+
+		<separator />
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+		<div class="row">
+			<div class="col-md-3">
+				<groupbox>
+					<caption label="Barge" />
+
+					<hbox align="center">
+						<cell width="90px">
+							<label value="Barge ID" />
+						</cell>
+
+						<cell width="90px">
+							<textbox
+								value="@bind(vm.dtlObjToSave.bargeId)" />
+						</cell>
+						<cell>
+							<button label="LOV"
+								onClick="@command('findBarge')" sclass="btn-info" zclass="btn" />
+						</cell>
+
+					</hbox>
+
+					<separator />
+
+					<hbox>
+						<cell width="90px">
+							<label value="Barge Name" />
+						</cell>
+
+						<cell width="90px">
+							<textbox
+								value="@bind(vm.dtlObjToSave.bargeName)" />
+						</cell>
+					</hbox>
+					<separator />
+
+					<hbox>
+						<cell width="90px">
+							<label value="Jetty" />
+						</cell>
+
+						<cell width="90px">
+							<textbox
+								value="@bind(vm.dtlObjToSave.jetty)">
+							</textbox>
+						</cell>
+					</hbox>
+					<separator />
+
+					<hbox>
+						<cell width="90px">
+							<label value="Product" />
+						</cell>
+
+						<cell width="90px">
+							<textbox
+								value="@load(vm.dtlObjToSave.product)" />
+						</cell>
+					</hbox>
+
+
+				</groupbox>
+			</div>
+			<div class="col-md-9">
+
+				<groupbox>
+					<caption label="Reclaim Tonnage" />
+					<listbox model="@load(vm.splToBrgDtls)"
+						sclass="own-blue" multiple="true" checkmark="true"
+						selectedItems="@bind(vm.selectedSplToBrgDtls)">
+						<listhead>
+							<listheader width="30px" />
+							<listheader label="Reclaim" />
+							<listheader label="Tonnage" />
+							<listheader label="TM" />
+							<listheader label="TS" />
+							<listheader label="ASH" />
+						</listhead>
+						<template name="model">
+							<listitem>
+								<listcell />
+								<listcell label="@load(each.reclaim)" />
+								<listcell>
+									<decimalbox
+										value="@bind(each.tonnage)" />
+								</listcell>
+								<listcell label="@load(each.tm)" />
+								<listcell label="@load(each.ts)" />
+								<listcell label="@load(each.ash)" />
+							</listitem>
+						</template>
+					</listbox>
+				</groupbox>
+
+
+				<groupbox>
+					<caption label="List Data" />
+					<listbox emptyMessage="No Records Found"
+						sclass="own" model="@load(vm.details)" mold="paging"
+						pagingPosition="bottom" pageSize="10"
+						selectedItem="@bind(vm.dtlObjToSave)"
+						onSelect="@command('onSelectDtlListBox')">
+						<listhead>
+							<listheader label="Barge ID" />
+							<listheader label="Barge Name" />
+							<listheader label="Tonnage" />
+							<listheader label="CV" />
+							<listheader label="TM" />
+							<listheader label="TS" />
+							<listheader label="ASH" />
+						</listhead>
+						<template name="model">
+							<listitem>
+								<listcell label="@load(each.bargeId)" />
+								<listcell label="@load(each.bargeName)" />
+								<listcell
+									label="@load(each.tonnage) @converter('formatedNumber',format='#,##0')" />
+								<listcell
+									label="@load(each.cv) @converter('formatedNumber',format='#,##0')" />
+								<listcell label="@load(each.tm)" />
+								<listcell label="@load(each.ts)" />
+								<listcell label="@load(each.ash)" />
+							</listitem>
+						</template>
+					</listbox>
+				</groupbox>
+			</div>
+		</div>
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

@@ -1,0 +1,3 @@
+<div id="sidebar" sclass="sidebar"
+	apply="com.adaro.kelanis.viewmodel.SidebarDefaultVM">
+</div>

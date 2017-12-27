@@ -1,0 +1,61 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroCrushingYtdVM')"><!-- SaveState hanyalah decoy -->
+
+		<style src="css/own.css" />
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Crushing Year To Date" />
+		</div>
+
+		<hbox>
+			<button sclass="btn-success" zclass="btn" label="Save"
+				iconSclass="glyphicon glyphicon-list-alt" height="30px" onClick="@command('save')"/>
+
+		</hbox>
+
+		<!-- END OF HEADER AREA -->
+
+		<separator height="10px" />
+
+		<!-- CONTENT AREA -->
+		<hbox>
+			<cell width="100px">Tahun</cell>
+			<cell>
+				<combobox model="@load(vm.years)"
+					onSelect="@command('onSelectYears')" selectedItem="@save(vm.selectedYear)">
+					<template name="model">
+						<comboitem value="@load(each)"
+							label="@load(each)" />
+					</template>
+				</combobox>
+			</cell>
+
+			<cell>
+				<listbox model="@load(vm.crushings)"
+					sclass="own-orange" emptyMessage="No Records Found">
+					<listhead>
+						<listheader label="Bulan" />
+						<listheader label="Tonnage" />
+					</listhead>
+					<template name="model" var="item">
+						<listitem>
+							<listcell label="@load(item.pk.month)" />
+							<listcell>
+								<intbox value="@bind(item.tonnage)" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+			</cell>
+		</hbox>
+		<!-- END OF CONTENT AREA -->
+
+		<!-- START OF POPUP AREA -->
+
+		<!-- END OF POPUP AREA -->
+	</vlayout>
+</zk>

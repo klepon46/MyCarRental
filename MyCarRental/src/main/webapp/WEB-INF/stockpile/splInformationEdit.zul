@@ -1,0 +1,333 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroSplInformationEditVM')">
+
+		<style src="css/own.css" />
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="@load(vm.titleForm)" />
+		</div>
+
+
+		<hlayout>
+			<button label="Save" onClick="@command('save')"
+				sclass="btn-success" zclass="btn"
+				iconSclass="glyphicon glyphicon-floppy-disk" height="30px"
+				width="100px" />
+
+		</hlayout>
+		<!-- end of Header Area -->
+
+		<!-- START OF CONTENT AREA -->
+
+		<hlayout>
+
+			<groupbox hflex="7">
+				<caption label="Stockpile" sclass="fontBold" />
+
+
+				<tabbox>
+					<tabs>
+						<tab label="Kelanis 1" />
+						<tab label="Kelanis 3" />
+					</tabs>
+
+					<tabpanels>
+						<tabpanel>
+							<listbox model="@load(vm.splStocks)"
+								sclass="own-blue" selectedItem="@bind(vm.tblKctSplStock)"
+								onSelect="@command('onSelectSpl')">
+								<listhead>
+									<listheader label="RECLAIM" />
+									<listheader label="PRODUCT" />
+									<listheader label="CV" />
+									<listheader label="TM" />
+									<listheader label="TS" />
+									<listheader label="ASH" />
+									<listheader label="CURRENT STOCK" />
+								</listhead>
+								<template name="model">
+									<listitem
+										visible="@load(each.tblKctMstSplLine.splCode eq 'K1' ? true:false)">
+										<listcell>
+											<label
+												value="@load(each.pk.reclaim)" sclass="fontBold" />
+										</listcell>
+
+										<listcell
+											zclass="@load(each.tblKctMstSplLine.tblKctMstProduct.color)">
+											<label
+												value="@load(each.tblKctMstSplLine.tblKctMstProduct.productName)"
+												sclass="fontBold geser-kanan" />
+										</listcell>
+
+										<listcell>
+											<label
+												value="@load(each.currentCv) @converter('formatedNumber', format='###,###.##')"
+												sclass="fontBold" />
+										</listcell>
+
+										<listcell>
+											<label
+												value="@load(each.tm) @converter('formatedNumber', format='###,###.##')"
+												sclass="fontBold" />
+										</listcell>
+
+										<listcell>
+											<label
+												value="@load(each.ts) @converter('formatedNumber', format='###,###.##')"
+												sclass="fontBold" />
+										</listcell>
+
+										<listcell>
+											<label
+												value="@load(each.ash) @converter('formatedNumber', format='###,###.##')"
+												sclass="fontBold" />
+										</listcell>
+
+										<listcell>
+											<label
+												value="@load(each.currentStock) @converter('formatedNumber', format='###,###.##')"
+												sclass="fontBold" />
+										</listcell>
+									</listitem>
+								</template>
+							</listbox>
+
+						</tabpanel>
+
+						<tabpanel>
+							<listbox model="@load(vm.splStocks)"
+								sclass="own-blue" selectedItem="@bind(vm.tblKctSplStock)"
+								onSelect="@command('onSelectSpl')">
+								<listhead>
+									<listheader label="RECLAIM" />
+									<listheader label="PRODUCT" />
+									<listheader label="CV" />
+									<listheader label="TM" />
+									<listheader label="TS" />
+									<listheader label="ASH" />
+									<listheader label="CURRENT STOCK" />
+								</listhead>
+								<template name="model">
+									<listitem
+										visible="@load(each.tblKctMstSplLine.splCode eq 'K3' ? true:false)">
+										<listcell>
+											<label
+												value="@load(each.pk.reclaim)" sclass="fontBold" />
+										</listcell>
+
+										<listcell
+											zclass="@load(each.tblKctMstSplLine.tblKctMstProduct.color)">
+											<label
+												value="@load(each.tblKctMstSplLine.tblKctMstProduct.productName)"
+												zclass="fontBold geser-kanan" sclass="fontBold" />
+										</listcell>
+
+										<listcell>
+											<label
+												value="@load(each.currentCv) @converter('formatedNumber', format='###,###.##')"
+												sclass="fontBold" />
+										</listcell>
+
+										<listcell>
+											<label
+												value="@load(each.tm) @converter('formatedNumber', format='###,###.##')"
+												sclass="fontBold" />
+										</listcell>
+
+										<listcell>
+											<label
+												value="@load(each.ts) @converter('formatedNumber', format='###,###.##')"
+												sclass="fontBold" />
+										</listcell>
+
+										<listcell>
+											<label
+												value="@load(each.ash) @converter('formatedNumber', format='###,###.##')"
+												sclass="fontBold" />
+										</listcell>
+
+										<listcell>
+											<label
+												value="@load(each.currentStock) @converter('formatedNumber', format='###,###.##')"
+												sclass="fontBold" />
+										</listcell>
+
+									</listitem>
+								</template>
+							</listbox>
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+			</groupbox>
+
+			<groupbox hflex="3">
+				<caption label="Adjustment" sclass="fontBold" />
+				<hbox>
+					<cell width="100px">
+						<label value="CV" />
+					</cell>
+					<cell>
+						<decimalbox
+							value="@load(vm.tblKctSplStock.currentCv) @save(vm.tblKctSplStock.currentCv) @save(vm.tblKctSplAdjust.afterAdjustCv)"
+							format="###,###.##" />
+					</cell>
+				</hbox>
+
+				<separator />
+
+				<hbox>
+					<cell width="100px">
+						<label value="TM" />
+					</cell>
+					<cell>
+						<decimalbox
+							value="@load(vm.tblKctSplStock.tm) @save(vm.tblKctSplStock.tm) @save(vm.tblKctSplAdjust.afterAdjustTm)"
+							format="###,###.##" />
+					</cell>
+				</hbox>
+
+				<separator />
+
+				<hbox>
+					<cell width="100px">
+						<label value="TS" />
+					</cell>
+					<cell>
+						<decimalbox
+							value="@load(vm.tblKctSplStock.ts) @save(vm.tblKctSplStock.ts) @save(vm.tblKctSplAdjust.afterAdjustTs)"
+							format="###,###.##" />
+					</cell>
+				</hbox>
+
+				<separator />
+
+				<hbox>
+					<cell width="100px">
+						<label value="ASH" />
+					</cell>
+					<cell>
+						<decimalbox
+							value="@load(vm.tblKctSplStock.ash) @save(vm.tblKctSplStock.ash) @save(vm.tblKctSplAdjust.afterAdjustAsh)"
+							format="###,###.##" />
+					</cell>
+				</hbox>
+
+				<separator />
+
+				<hbox>
+					<cell width="100px">
+						<label value="Tonnage" />
+					</cell>
+
+					<cell>
+						<decimalbox
+							value="@load(vm.tblKctSplStock.currentStock) @save(vm.tblKctSplStock.currentStock) @save(vm.tblKctSplAdjust.afterAdjustStock) @save(vm.tblKctSplStock.openingStock)"
+							format="###,###.##" />
+					</cell>
+				</hbox>
+
+				<separator />
+
+				<hbox>
+					<cell width="100px">
+						<label value="Remark" />
+					</cell>
+
+					<cell>
+						<textbox
+							value="@bind(vm.tblKctSplAdjust.remark)" width="250px" />
+					</cell>
+				</hbox>
+			</groupbox>
+
+		</hlayout>
+
+
+		<groupbox>
+			<caption label="Adjustment History" sclass="fontBold" />
+
+			<listbox model="@load(vm.splAdjusts)" sclass="own"
+				emptyMessage="No Records To Display" mold="paging" pageSize="10">
+				<listhead>
+					<listheader label="RECLAIM" />
+					<listheader label="TONNAGE" />
+					<listheader label="CV" />
+					<listheader label="TM" />
+					<listheader label="TS" />
+					<listheader label="ASH" />
+					<listheader label="REMARK" />
+					<listheader label="CREATED DATE" />
+					<listheader label="CREATED BY" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell>
+							<label value="@load(each.reclaim)"
+								sclass="fontBold" />
+						</listcell>
+
+						<listcell>
+							<label if="${each.afterAdjustStock != null}"
+								value="@load(each.afterAdjustStock) @converter('formatedNumber', format='###,###')"
+								sclass="fontBold" />
+							<label if="${each.afterAdjustStock == null}"
+								value="Not Changed" sclass="fontBold" />
+						</listcell>
+
+						<listcell>
+							<label if="${each.afterAdjustCv != null}"
+								value="@load(each.afterAdjustCv) @converter('formatedNumber', format='###,###')"
+								sclass="fontBold" />
+							<label if="${each.afterAdjustCv == null}"
+								value="Not Changed" sclass="fontBold" />
+						</listcell>
+
+						<listcell>
+							<label if="${each.afterAdjustTm != null}"
+								value="@load(each.afterAdjustTm)" sclass="fontBold" />
+							<label if="${each.afterAdjustTm == null}"
+								value="Not Changed" sclass="fontBold" />
+						</listcell>
+
+						<listcell>
+							<label if="${each.afterAdjustTs != null}"
+								value="@load(each.afterAdjustTs)" sclass="fontBold" />
+							<label if="${each.afterAdjustTs == null}"
+								value="Not Changed" sclass="fontBold" />
+						</listcell>
+
+						<listcell>
+							<label if="${each.afterAdjustAsh != null}"
+								value="@load(each.afterAdjustAsh)" sclass="fontBold" />
+							<label if="${each.afterAdjustAsh == null}"
+								value="Not Changed" sclass="fontBold" />
+						</listcell>
+
+						<listcell>
+							<label value="@load(each.remark)" />
+						</listcell>
+
+						<listcell>
+							<label
+								value="@load(each.createdDate) @converter('formatedDate', format='dd/MM/yyyy hh:mm')"
+								sclass="fontBold" />
+						</listcell>
+
+						<listcell>
+							<label value="@load(each.createdBy)"
+								sclass="fontBold" />
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+
+		</groupbox>
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

@@ -1,0 +1,11 @@
+<div id="sidebar" sclass="sidebar"
+	apply="applications2.SidebarComposer">
+	<!-- Navigation List -->
+	<navbar id="navbar" sclass="nav-list" orient="vertical">
+		<navitem label="Dashboard" iconSclass="z-icon-dashboard"
+			selected="true" />
+		<navitem label="Stock" iconSclass="z-icon-ban" />
+		
+	</navbar>
+
+</div>

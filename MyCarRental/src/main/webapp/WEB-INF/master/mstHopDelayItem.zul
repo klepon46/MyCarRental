@@ -1,0 +1,118 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroMstDelayHopperVM')">
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Master Hopper Delay Item" />
+		</div>
+
+		<hbox>
+			<button sclass="btn-warning" zclass="btn" label="Add New"
+				iconSclass="glyphicon glyphicon-plus" onClick="@command('addNew')" />
+
+			<button label="Save" onClick="@command('save')"
+				sclass="btn-success" zclass="btn"
+				iconSclass="glyphicon glyphicon-floppy-disk" height="30px"
+				width="100px" disabled="@load(vm.buttonSaveActive)" />
+
+			<button sclass="btn-info" zclass="btn" label="Update"
+				iconSclass="glyphicon glyphicon-pencil" onClick="@command('update')"
+				width="100px" disabled="@load(vm.buttonUpdateActive)" />
+		</hbox>
+
+		<separator />
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+
+		<hbox>
+			<cell width="100px">
+				<label value="Problem Name" />
+			</cell>
+
+			<cell>
+				<textbox value="@bind(vm.problem.problemName)"
+					constraint="no empty:Tidak Boleh Kosong" />
+			</cell>
+		</hbox>
+
+		<separator />
+
+		<hbox>
+			<cell width="100px">
+				<label value="Level" />
+			</cell>
+
+			<combobox value="@bind(vm.problem.problemLevel)"
+				onSelect="@command('onSelectCombo')"
+				constraint="no empty:Tidak Boleh Kosong"
+				disabled="@load(vm.comboLevelActive)"
+				model="@load(vm.listModelLevel)" readonly="true">
+				<template name="model">
+					<comboitem value="@load(each)" label="@load(each)" />
+				</template>
+			</combobox>
+		</hbox>
+
+		<separator />
+
+		<hbox>
+			<cell width="100px">
+				<label value="Hopper" />
+			</cell>
+
+			<cell>
+				<hbox children="@load(vm.hoppers)">
+					<template name="children">
+						<checkbox label="@load(each)"
+							sclass="checkbox-inline"
+							onCheck="@command('onCheckHopper', me = self)"
+							disabled="@load(vm.hopperCheckboxActive)" />
+						<separator width="10px" />
+					</template>
+				</hbox>
+			</cell>
+
+		</hbox>
+
+		<div style="text-align: right">
+			<bandbox placeholder="Search..."
+				onOK="@command('searchAll', search = self.value)"
+				onChanging="@command('onChanging')" />
+		</div>
+
+		<separator />
+
+		<listbox sclass="own" emptyMessage="No Records Found"
+			mold="paging" pageSize="10" model="@load(vm.lmProblems)"
+			pagingPosition="bottom" selectedItem="@bind(vm.problem)"
+			onSelect="@command('onSelectDtlListbox')">
+			<listhead>
+				<listheader label="Problem Name" />
+				<listheader label="Level" />
+				<listheader label="Hopper" />
+				<listheader label="Assigned" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell>
+						<label value="@load(each.problemName)" />
+					</listcell>
+
+					<listcell>
+						<label value="@load(each.problemLevel)" />
+					</listcell>
+
+					<listcell>
+						<label value="@load(each.hopperCode)" />
+					</listcell>
+					<listcell
+						label="@load(each.problemParent ne null ? 'Yes':'No')" />
+				</listitem>
+			</template>
+		</listbox>
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

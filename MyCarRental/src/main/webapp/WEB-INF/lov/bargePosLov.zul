@@ -1,0 +1,76 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window apply="org.zkoss.bind.BindComposer" border="normal"
+		viewModel="@id('vm') @init('com.adaro.kelanis.lov.BargePosLovVM')"
+		mode="modal" closable="true" width="70%" contentStyle="overflow: auto"
+		id="win" title="Lov Barge">
+
+		<style src="css/own.css" />
+
+		<label style="font-size:32px;" value="@load(vm.title)"></label>
+		<separator height="10px" />
+		<hbox>
+			<!-- 			<button label="Up Stream" zclass="btn" sclass="btn-warning" -->
+			<!-- 				iconSclass="glyphicon glyphicon-arrow-up" -->
+			<!-- 				onClick="@command('upStream')" /> -->
+			<!-- 			<button label="Down Stream" zclass="btn" sclass="btn-info" -->
+			<!-- 				iconSclass="glyphicon glyphicon-arrow-down" -->
+			<!-- 				onClick="@command('downStream')" /> -->
+			<!-- 			<button label="BLS &amp; GPS" zclass="btn" -->
+			<!-- 				sclass="btn-warning" iconSclass="glyphicon glyphicon-flag" -->
+			<!-- 				onClick="@command('blsAndGps')" /> -->
+			<!-- 			<button label="Non Gps" zclass="btn" sclass="btn-primary" -->
+			<!-- 				onClick="@command('nonGps')" iconSclass = "glyphicon glyphicon-flag" /> -->
+			<button label="Pilih" zclass="btn" sclass="btn-success"
+				iconSclass="glyphicon glyphicon-ok"
+				onClick="@command('pilihBarge', win = win)" />
+			<!-- 			<button label="Input Manual" zclass="btn" -->
+			<!-- 				sclass="btn-danger" iconSclass="glyphicon glyphicon-pencil" -->
+			<!-- 				onClick="@command('inputManual', win = win)" disabled="true" /> -->
+		</hbox>
+
+		<separator />
+
+		<textbox placeholder="Enter To Search Barge"
+			onOK="@command('searchAll', search = self.value)"
+			onChanging="@command('onChanging')" sclass="form-control" />
+
+		<separator />
+
+		<listbox model="@load(vm.barges)" sclass="own" mold="paging"
+			pageSize="10" selectedItem="@bind(vm.lineUp)"
+			emptyMessage="No Records Found">
+			<listhead>
+				<listheader label="Cargo ID" />
+				<listheader label="Barge" />
+				<listheader label="Tug Boat" />
+				<!-- 				<listheader label="Direction" /> -->
+			</listhead>
+			<template name="model">
+				<listitem
+					onDoubleClick="@command('onDoubleClick', win = win)">
+					<listcell>
+						<label value="@load(each.klsCargo)"
+							sclass="fontBold" />
+					</listcell>
+
+					<listcell>
+						<label value="@load(each.klsBarge)"
+							sclass="fontBold" />
+					</listcell>
+
+					<listcell>
+						<label value="@load(each.klsDest)"
+							sclass="fontBold" />
+					</listcell>
+
+					<!-- 					<listcell> -->
+					<!-- 						<label -->
+					<!-- 							value="@load(vm.upStream eq true ? 'Up Stream':'Down Stream')" /> -->
+					<!-- 					</listcell> -->
+				</listitem>
+			</template>
+		</listbox>
+
+	</window>
+</zk>

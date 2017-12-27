@@ -1,0 +1,306 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroHopProdHeaderNewVM')"
+		form="@id('fx') @init(vm.form) @load(vm.tblKctHopProdDtl) @save(vm.tblKctHopProdDtl, before='startProduksi')">
+
+		<style src="css/own.css" />
+
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="@load(vm.formDetailTitle)" />
+		</div>
+
+		<div>
+			<div>
+				<button label="Back" sclass="btn-danger" zclass="btn"
+					iconSclass="glyphicon glyphicon-chevron-left"
+					onClick="@command('back')" height="30px" width="100px" />
+
+				<button label="Add New"
+					onClick="@command('addNewEntry')" sclass="btn-warning" zclass="btn"
+					iconSclass="glyphicon glyphicon-plus" height="30px" width="100px" />
+
+				<button label="Save" onClick="@command('save')"
+					sclass="btn-success" zclass="btn"
+					iconSclass="glyphicon glyphicon-floppy-disk" height="30px"
+					width="100px" disabled="@load(vm.datePassed)" visible="false" />
+
+				<!-- 					disabled="@load(vm.datePassed)" -->
+
+				<div style="float: right">
+
+					<label value="Total Produksi " sclass="fontMe" />
+					<space width="15px" />
+					<label value="Shift 1 : " sclass="fontMe" />
+					<label
+						value="@load(vm.totalShift1) @converter('formatedNumber',format='###,###')"
+						sclass="fontMe textGreen" />
+					<space width="20px" />
+					<label value="Shift 2 : " sclass="fontMe" />
+					<label
+						value="@load(vm.totalShift2) @converter('formatedNumber',format='###,###')"
+						sclass="fontMe textOrange" />
+				</div>
+			</div>
+
+		</div>
+
+
+		<separator />
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+		<hlayout>
+			<vlayout hflex="3">
+				<groupbox>
+					<caption label="Position" />
+
+					<hbox align="center">
+						<cell width="100px">MCC</cell>
+						<cell>
+							<textbox
+								value="@bind(vm.tblKctHopProdDtl.mccCode)" readonly="true" />
+						</cell>
+					</hbox>
+
+					<separator />
+
+					<hbox align="center">
+						<cell width="100px">Direction</cell>
+						<cell>
+							<combobox id="state"
+								onSelect="@command('onComboState')"
+								constraint="no empty : Kolom Tidak Boleh Kosong"
+								value="@bind(vm.tblKctHopProdDtl.state)" readonly="true">
+								<comboitem label="STOCKPILE"
+									value="STOCKPILE" />
+								<comboitem label="BYPASS"
+									value="BYPASS" />
+								<comboitem label="SPLIT"
+									visible="@load(vm.tblKctHopProdDtl.mccCode eq 'MCC2' ? true:false)"
+									value="SPLIT" />
+							</combobox>
+						</cell>
+					</hbox>
+
+					<separator />
+
+					<hbox align="center">
+						<cell width="100px">Hopper</cell>
+						<cell>
+							<combobox
+								value="@bind(vm.tblKctHopProdDtl.hopperCode)"
+								constraint="no empty" model="@load(vm.mccPlans)"
+								onSelect="@command('onComboHopper')"
+								selectedItem="@save(vm.tblKctMstMccPlan)"
+								disabled="@load(vm.tblKctHopProdDtl.state eq null ? true:false)"
+								readonly="true">
+								<template name="model">
+									<comboitem
+										label="@load(each.hopperCode)" value="@load(each.hopperCode)" />
+								</template>
+							</combobox>
+						</cell>
+					</hbox>
+
+					<separator />
+
+					<hbox>
+						<cell width="100px">Line</cell>
+						<cell>
+							<textbox readonly="true"
+								value="@bind(vm.tblKctHopProdDtl.line)"
+								visible="@load(vm.tblKctHopProdDtl.mccCode ne 'MCC2' ? true:false)" />
+							<combobox
+								visible="@load(vm.tblKctHopProdDtl.mccCode eq 'MCC2' ? true:false)"
+								model="@load(vm.mccPlans)" onOpen="@command('onComboLine')"
+								value="@bind(vm.tblKctHopProdDtl.line)" readonly="true">
+								<template name="model">
+									<comboitem label="@load(each.line)"
+										value="@load(each.line)" />
+								</template>
+							</combobox>
+						</cell>
+					</hbox>
+				</groupbox>
+
+
+				<separator />
+
+				<groupbox>
+					<caption label="Product" />
+					<hbox align="center" style="align-text: left;">
+						<cell width="100px">Column</cell>
+						<cell>
+							<combobox
+								value="@bind(vm.tblKctHopProdDtl.holeCode)"
+								onSelect="@command('onComboColumn')"
+								disabled="@load(vm.tblKctHopProdDtl.hopperCode eq null ? true: vm.tblKctHopProdDtl.state eq 'BYPASS' ? true:false)"
+								readonly="true">
+								<comboitem label="A" value="A" />
+								<comboitem label="B" value="B" />
+								<comboitem label="C" value="C" />
+								<comboitem label="D" value="D" />
+								<comboitem label="E" value="E" />
+								<comboitem label="F" value="F" />
+								<comboitem label="G" value="G" />
+								<comboitem label="H" value="H" />
+							</combobox>
+						</cell>
+					</hbox>
+
+					<separator />
+
+					<hbox align="center">
+						<cell width="100px">Product</cell>
+						<cell>
+							<combobox value="@bind(fx.product)"
+								readonly="true"
+								disabled="@load(vm.tblKctHopProdDtl.hopperCode eq null ? true:false)"
+								model="@load(vm.tblKctHopProdDtl.state eq 'STOCKPILE' ? vm.columnPlans:vm.products) @template(vm.tblKctHopProdDtl.state eq 'STOCKPILE' ? 'template1':'template2' )"
+								onOpen="@command('onOpenComboProduct')"
+								constraint="no empty:Kolom Tidak Boleh Kosong"
+								onSelect="@command('onSelectComboProduct', val = self)">
+								<template name="template1">
+									<comboitem
+										label="@load(each.tblKctMstProduct.productName)"
+										value="@load(each.reclaim)" />
+								</template>
+
+								<template name="template2">
+									<comboitem label="@load(each)"
+										value="@load(each)" />
+								</template>
+							</combobox>
+						</cell>
+					</hbox>
+
+					<separator />
+
+					<hbox align="center">
+						<cell width="100px">Barge</cell>
+						<cell>
+							<textbox id="tbbarge"
+								value="@load(vm.tblKctHopProdDtl.tblKctJetProdDtl.bargeName)"
+								readonly="true" />
+						</cell>
+						<button label="Check" sclass="btn-info"
+							zclass="btn" onClick="@command('cekBarge', me = tbbarge)" />
+					</hbox>
+
+					<separator />
+
+					<button label="Start" sclass="btn-success"
+						width="100px" zclass="btn" onClick="@command('startProduksi')"
+						disabled="@load(vm.qc)" />
+				</groupbox>
+			</vlayout>
+
+			<vlayout hflex="9">
+
+				<groupbox>
+					<caption label="Active Hopper"
+						style="color: green; font-weight: bold;" />
+					<listbox model="@load(vm.listActive)"
+						sclass="own-blue" emptyMessage="No Active Hopper Found">
+						<listhead>
+							<listheader label="MCC" />
+							<listheader label="Hopper" />
+							<listheader label="Line" />
+							<listheader label="Direction" />
+							<listheader label="Start time" />
+							<listheader label="Stop Time" />
+							<listheader label="Action" />
+						</listhead>
+						<template name="model">
+							<listitem
+								sclass="@load(each.state eq 'BYPASS' ? 'task-blue':'task-mgreen')">
+								<listcell label="@load(each.mccCode)" />
+								<listcell
+									label="@load(each.hopperCode)" />
+								<listcell label="@load(each.line)" />
+								<listcell label="@load(each.state)" />
+								<listcell label="@load(each.startTime)"
+									style="font-weight: bold;" />
+								<listcell label="@load(each.stopTime)"
+									style="font-weight: bold;" />
+								<listcell>
+									<button label="Stop"
+										sclass="btn-danger" zclass="btn"
+										onClick="@command('stopProduksi', item = each)"
+										disabled="@load(vm.qc)" />
+								</listcell>
+							</listitem>
+						</template>
+					</listbox>
+
+				</groupbox>
+
+				<groupbox>
+					<caption label="List Data" />
+					<listbox emptyMessage="No Records Found"
+						sclass="own" model="@load(vm.listDtls)" mold="paging" pageSize="6"
+						height="400px">
+						<listhead>
+							<listheader label="Hopper" width="60px" />
+							<listheader label="Line" width="60px" />
+							<listheader label="Direction" />
+							<listheader label="Tonnage" width="80px" />
+							<listheader label="Start time" />
+							<listheader label="Stop Time" />
+							<listheader label="Duration" width="60px" />
+							<listheader label="CV" />
+							<listheader label="Created By" />
+							<listheader label="Updated By" />
+							<listheader label="" />
+						</listhead>
+						<template name="model">
+							<listitem
+								sclass="@load(each.state eq 'BYPASS' ? 'task-blue':'task-mgreen')">
+								<listcell
+									label="@load(each.hopperCode)" />
+								<listcell label="@load(each.line)" />
+								<listcell label="@load(each.state)" />
+								<listcell
+									label="@load(each.tonnage) @converter('formatedNumber', format='###,###')"
+									style="font-weight: bold;" />
+								<listcell>
+									<timebox format="HH:mm"
+										value="@save(each.startTime)" mold="rounded"
+										onCreate="@command('onCreateInsideStartTime', each=each, me=self)"
+										onChange="@command('onChangeTimeInsideStart',each=each,  me=self)" />
+								</listcell>
+
+								<listcell>
+									<timebox format="HH:mm"
+										value="@save(each.stopTime)" mold="rounded"
+										onCreate="@command('onCreateInsideStopTime', each=each, me=self)"
+										onChange="@command('onChangeTimeInside',each=each,  me=self)" />
+
+								</listcell>
+								<listcell label="@load(each.duration)"
+									style="font-weight: bold;" />
+								<listcell
+									label="@load(each.cv) @converter('formatedNumber', format='###,###')"
+									style="font-weight: bold;" />
+								<listcell label="@load(each.createdBy)" />
+								<listcell label="@load(each.updatedBy)" />
+								<listcell>
+									<button label="Update"
+										sclass="btn-info" zclass="btn"
+										onClick="@command('updateProduksi', each=each)"
+										disabled="@load(vm.qc)" />
+								</listcell>
+							</listitem>
+						</template>
+					</listbox>
+				</groupbox>
+
+			</vlayout>
+		</hlayout>
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>

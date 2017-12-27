@@ -1,0 +1,9 @@
+<div id="sidebar" sclass="sidebar"
+	apply="com.adaro.kelanis.viewmodel.SidebarHopVM">
+	<!-- Navigation List -->
+	<navbar id="navbar1" sclass="nav-list" orient="vertical"></navbar>
+	
+	<script type="text/javascript" src="/js/probChart.js"/>
+	
+	
+</div>

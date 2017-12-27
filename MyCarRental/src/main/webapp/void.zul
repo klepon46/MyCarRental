@@ -1,0 +1,28 @@
+<?page title="Adaro KCT"?>
+<!-- Load Bootstrap  -->
+<?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+
+<!-- Google Open Sans font -->
+<!-- Load fonts from local -->
+<?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
+
+<!-- Unmark if we want to use fonts from google server
+	<?link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'?>
+-->
+
+<?link href="less/index.css.dsp" rel="stylesheet" type="text/css"?>
+
+<zk xmlns:n="native">
+
+<!-- 	<include src="navbar.zul" /> -->
+	<hlayout id="main" spacing="0">
+		<vlayout spacing="0" hflex="1">
+			<window border="normal" sclass="alert alert-danger">
+				<caption iconSclass="z-icon-check">
+					Sorry, You don't have permission to use this application,
+					please contact Your Administrator
+				</caption>
+			</window>
+		</vlayout>
+	</hlayout>
+</zk>

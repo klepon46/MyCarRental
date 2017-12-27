@@ -1,0 +1,27 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Chart Detail" border="normal" mode="modal"
+		apply="org.zkoss.bind.BindComposer" width="50%" height="55%"
+		closable="true" contentStyle="overflow: auto"
+		viewModel="@id('vm') @init('com.adaro.kelanis.lov.ChartPass29LovVM')">
+
+		<listbox model="@load(vm.passed29s)" mold="paging" pageSize="10"
+			pagingPosition="bottom" sclass="own">
+			<listhead>
+				<listheader label="Truck No" />
+				<listheader label="Material Kode" />
+				<listheader label="Grade" />
+				<listheader label="Passed 29 Time" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.truckNo)" />
+					<listcell label="@load(each.materialKode)" />
+					<listcell label="@load(each.seriesNameString)" />
+					<listcell label="@load(each.passed29CheckPoint)" />
+				</listitem>
+			</template>
+		</listbox>
+
+	</window>
+</zk>

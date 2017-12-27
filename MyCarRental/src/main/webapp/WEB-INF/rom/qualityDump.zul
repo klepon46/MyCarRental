@@ -1,0 +1,64 @@
+<zk>
+	<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.adaro.kelanis.viewmodel.AdaroQualityDumpVM')">
+		
+		<!-- Header Area -->
+		<div sclass="page-header">
+			<label value="Dumping Detail" />
+		</div>
+
+		<hbox>
+			<button sclass="btn-success" zclass="btn"
+				label="Export To Excel" onClick="@command('toExcel')"
+				iconSclass="glyphicon glyphicon-list-alt" />
+			<space />
+			<button sclass="btn-danger" zclass="btn"
+				label="Export To Pdf" onClick="@command('toPdf')"
+				iconSclass="glyphicon glyphicon-print" />
+		</hbox>
+
+		<div style="text-align: right">
+			<bandbox placeholder="Search..." value="@save(vm.search)"
+				onOK="@command('search')" />
+		</div>
+
+		<separator />
+
+		<!-- END OF HEADER AREA -->
+
+		<!-- CONTENT AREA -->
+
+		<listbox model="@load(vm.dumps)" mold="paging" pageSize="10"
+			pagingPosition="bottom" sclass="own"
+			emptyMessage="No Records Found">
+			
+			<custom-attributes org.zkoss.zul.listbox.rod="true" />
+			
+			<listhead>
+				<listheader label="Truck No" />
+				<listheader label="Grade Name" />
+				<listheader label="Destination" />
+				<listheader label="Total Net Dump (Ton)" />
+				<listheader label="Material Kode" />
+				<listheader label="CV" />
+				<listheader label="Date Closed" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.truckNo)" />
+					<listcell label="@load(each.seriesNameToString)" />
+					<listcell label="@load(each.destinationKode)" />
+					<listcell
+						label="@load(each.totalNetDump) @converter('formatedNumber', format = '###,###')" />
+					<listcell label="@load(each.materialKode)" />
+					<listcell label="@load(each.calofatic) @converter('formatedNumber',format='###,###.##')" />
+					<listcell
+						label="@load(each.dateClosed) @converter('formatedDate', format = 'dd/MM/yyyy HH:mm')" />
+				</listitem>
+			</template>
+		</listbox>
+
+		<!-- END OF CONTENT AREA -->
+	</vlayout>
+</zk>
