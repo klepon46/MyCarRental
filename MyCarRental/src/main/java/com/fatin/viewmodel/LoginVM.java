@@ -34,6 +34,8 @@ public class LoginVM {
 		lm.logIn(user.getUserName(), user.getPassword());
 		
 		if(lm.isAuthenticated()){
+			Executions.getCurrent().getSession()
+			.setAttribute("id",lm.getUser().getId());
 			Executions.sendRedirect("index.zul");
 		}else{
 			Clients.showNotification("Wrong username and password");

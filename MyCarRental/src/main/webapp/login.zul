@@ -1,4 +1,4 @@
-<?page title="KCT" contentType="text/html;charset=UTF-8"?>
+<?page title="Car Rental" contentType="text/html;charset=UTF-8"?>
 <?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
 <!-- <?init class="com.adaro.kelanis.utl.AdrLoginInterceptor" ?> -->
 

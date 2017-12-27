@@ -1,4 +1,4 @@
-<?page id="index" title="Adaro KCT"?>
+<?page id="index" title="Car Rental"?>
 <?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
 <?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
 <!-- <?taglib uri="/WEB-INF/security.tld" prefix="sec"?> -->
