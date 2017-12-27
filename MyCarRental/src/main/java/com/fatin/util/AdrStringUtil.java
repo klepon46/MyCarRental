@@ -11,13 +11,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.time.DateUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Duration;
 import org.zkoss.zk.ui.Executions;
 
 public class AdrStringUtil {
@@ -314,107 +311,7 @@ public class AdrStringUtil {
 		return tonMultiCv.divide(sumTonnage, RoundingMode.HALF_UP);
 	}
 
-	/**
-	 * Method yang Digunakan Untuk menghitung sumProduct
-	 * 
-	 * @param net
-	 * @param cv
-	 * @return BigDecimal
-	 */
-	public static BigDecimal sumProduct(Collection<AdrSumProductHelper> coll) {
-		BigDecimal sumTonnage = new BigDecimal(0);
-		BigDecimal tonMultiCv = new BigDecimal(0);
-
-		for (AdrSumProductHelper helper : coll) {
-			sumTonnage = sumTonnage.add(helper.getTonnage());
-
-			tonMultiCv = tonMultiCv.add(helper.getTonnage().multiply(
-					helper.getCv()));
-		}
-
-		if (sumTonnage.compareTo(BigDecimal.ZERO) == 0) {
-			return BigDecimal.ZERO;
-		}
-
-		return tonMultiCv.divide(sumTonnage, RoundingMode.HALF_UP);
-	}
-
-	public static BigDecimal sumProductTm(Collection<AdrSumProductHelper> coll) {
-		BigDecimal sumTonnage = new BigDecimal(0);
-		BigDecimal tonMultiCv = new BigDecimal(0);
-
-		for (AdrSumProductHelper helper : coll) {
-			sumTonnage = sumTonnage.add(helper.getTonnage());
-
-			tonMultiCv = tonMultiCv.add(helper.getTonnage().multiply(
-					helper.getTm()));
-		}
-
-		if (sumTonnage.compareTo(BigDecimal.ZERO) == 0) {
-			return BigDecimal.ZERO;
-		}
-
-		return tonMultiCv.divide(sumTonnage, RoundingMode.HALF_UP);
-	}
-
-	public static BigDecimal sumProductTs(Collection<AdrSumProductHelper> coll) {
-		BigDecimal sumTonnage = new BigDecimal(0);
-		BigDecimal tonMultiCv = new BigDecimal(0);
-
-		for (AdrSumProductHelper helper : coll) {
-			sumTonnage = sumTonnage.add(helper.getTonnage());
-
-			tonMultiCv = tonMultiCv.add(helper.getTonnage().multiply(
-					helper.getTs()));
-		}
-
-		if (sumTonnage.compareTo(BigDecimal.ZERO) == 0) {
-			return BigDecimal.ZERO;
-		}
-
-		return tonMultiCv.divide(sumTonnage, RoundingMode.HALF_UP);
-	}
-
-	public static BigDecimal sumProductAsh(Collection<AdrSumProductHelper> coll) {
-		BigDecimal sumTonnage = new BigDecimal(0);
-		BigDecimal tonMultiCv = new BigDecimal(0);
-
-		for (AdrSumProductHelper helper : coll) {
-			sumTonnage = sumTonnage.add(helper.getTonnage());
-
-			tonMultiCv = tonMultiCv.add(helper.getTonnage().multiply(
-					helper.getAsh()));
-		}
-
-		if (sumTonnage.compareTo(BigDecimal.ZERO) == 0) {
-			return BigDecimal.ZERO;
-		}
-
-		return tonMultiCv.divide(sumTonnage, RoundingMode.HALF_UP);
-	}
-
-	public static Long dateMinuteDiff(Date dateStart, Date dateEnd) {
-
-		DateTime jodaDateStart = new DateTime(dateStart);
-		DateTime jodaDateEnd = new DateTime(dateEnd);
-
-		Duration duration = new Duration(jodaDateEnd, jodaDateStart);
-
-		return duration.getStandardMinutes();
-	}
-
-	public static Long dateHourDiff(Date dateStart, Date dateEnd) {
-
-		DateTime jodaDateStart = new DateTime(dateStart);
-		DateTime jodaDateEnd = new DateTime(dateEnd);
-
-		Duration duration = new Duration(jodaDateEnd, jodaDateStart);
-
-		return duration.getStandardHours();
-	}
-
 	public static String getCurrentUser() {
-
 		return (String) Executions.getCurrent().getSession()
 				.getAttribute("userName");
 	}
