@@ -13,7 +13,7 @@
 		<hlayout>
 			<groupbox hflex="6">
 				<caption label="Request Lists" />
-				<listbox model="@load(vm.users)" sclass="own"
+				<listbox model="@load(vm.users)" sclass="own" mold="paging"
 					emptyMessage="No Data Found" selectedItem="@save(vm.user)"
 					pageSize="10" pagingPosition="bottom">
 					<listhead>

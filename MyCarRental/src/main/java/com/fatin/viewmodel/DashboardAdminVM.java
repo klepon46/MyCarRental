@@ -17,4 +17,9 @@ public class DashboardAdminVM {
 		AdrStringUtil.navigate("adminApprovalPage.zul");
 	}
 	
+	@Command
+	public void navigateToUserAndCompanyProfilePage(){
+		AdrStringUtil.navigate("userAndCompanyLists.zul");
+	}
+	
 }

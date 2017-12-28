@@ -1,0 +1,67 @@
+<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fatin.viewmodel.UserAndCompanyListsVM')">
+
+	<div sclass="container-fluid">
+
+		<div sclass="page-header">
+			<label value="List User and Company" />
+			<a label="Beta Version"
+				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
+		</div>
+
+
+		<groupbox>
+			<caption label="Users" />
+
+			<listbox model="@load(vm.users)"
+				emptyMessage="No Records Found" mold="paging" pageSize="5"
+				pagingPosition="bottom" sclass="own">
+				<listhead>
+					<listheader label="User ID" />
+					<listheader label="Name" />
+				</listhead>
+
+				<template name="model">
+					<listitem>
+						<listcell>
+							<label value="@load(each.id)" />
+						</listcell>
+						<listcell>
+							<label value="@load(each.name)" />
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+		</groupbox>
+
+		<groupbox>
+			<caption label="Companies" />
+			<listbox model="@load(vm.companies)"
+				emptyMessage="No Records Found" mold="paging" pageSize="5"
+				pagingPosition="bottom" sclass="own-blue">
+				<listhead>
+					<listheader label="Company ID" />
+					<listheader label="Name" />
+					<listheader label="" />
+				</listhead>
+
+				<template name="model">
+					<listitem>
+						<listcell>
+							<label value="@load(each.id)" />
+						</listcell>
+						<listcell>
+							<label value="@load(each.name)" />
+						</listcell>
+						<listcell>
+							<button label="Details" sclass="btn-primary"
+								zclass="btn" />
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+		</groupbox>
+
+	</div>
+</vlayout>

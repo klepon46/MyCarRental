@@ -12,7 +12,7 @@
 
 		<hbox>
 			<button label="View Users Profile" sclass="btn-success"
-				zclass="btn" onClick="@command('navigateToUpdateProfilePage')" />
+				zclass="btn" onClick="@command('navigateToUserAndCompanyProfilePage')" />
 
 			<button label="Approve Company Request" sclass="btn-primary"
 				zclass="btn" onClick="@command('navigateToRequestApprovalPage')"/>
