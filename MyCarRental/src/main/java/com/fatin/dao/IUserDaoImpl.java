@@ -1,5 +1,7 @@
 package com.fatin.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +33,14 @@ public class IUserDaoImpl implements IUserDao {
 		q.setInteger("userID", userID);
 
 		return (User) q.uniqueResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<User> findAllUserByRole(String role) {
+		String query = "from User where role = :role ";
+		Query q = sessionFactory.getCurrentSession().createQuery(query);
+		q.setString("role", role);
+
+		return q.list();
 	}
 }

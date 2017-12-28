@@ -1,0 +1,23 @@
+<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fatin.viewmodel.DashboardAdminVM')">
+
+	<div sclass="container-fluid">
+
+		<div sclass="page-header">
+			<label value="Welcome" />
+			<a label="Beta Version"
+				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
+		</div>
+
+		<hbox>
+			<button label="View Users Profile" sclass="btn-success"
+				zclass="btn" onClick="@command('navigateToUpdateProfilePage')" />
+
+			<button label="Approve Company Request" sclass="btn-primary"
+				zclass="btn" onClick="@command('navigateToRequestApprovalPage')"/>
+
+		</hbox>
+
+	</div>
+</vlayout>

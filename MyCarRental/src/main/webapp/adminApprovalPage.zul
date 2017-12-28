@@ -1,0 +1,73 @@
+<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fatin.viewmodel.AdminApprovalPageVM')">
+
+	<div sclass="container-fluid">
+
+		<div sclass="page-header">
+			<label value="Approve Company Request" />
+			<a label="Beta Version"
+				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
+		</div>
+
+		<hlayout>
+			<groupbox hflex="6">
+				<caption label="Request Lists" />
+				<listbox model="@load(vm.users)" sclass="own"
+					emptyMessage="No Data Found" selectedItem="@save(vm.user)"
+					pageSize="10" pagingPosition="bottom">
+					<listhead>
+						<listheader label="CompanyID" />
+						<listheader label="Status" />
+					</listhead>
+
+					<template name="model">
+						<listitem>
+							<listcell>
+								<label value="@load(each.id)" />
+							</listcell>
+							<listcell>
+								<label
+									value="@load(each.isApprove eq 0 ? 'NO': 'YES')" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+
+			</groupbox>
+			<vlayout hflex="4">
+				<groupbox>
+					<caption label="Company Credentials" />
+					<hbox>
+						<cell width="150px">
+							<label value="Company User name" />
+						</cell>
+
+						<cell width="100px">
+							<textbox value="@bind(vm.user.userName)" />
+						</cell>
+					</hbox>
+
+					<n:br />
+
+					<hbox>
+						<cell width="150px">
+							<label value="Company Password	" />
+						</cell>
+
+						<cell width="100px">
+							<textbox value="@bind(vm.user.password)" />
+						</cell>
+					</hbox>
+					<button label="approve" sclass="btn-info pull-right"
+						zclass="btn" onClick="@command('approveRequest')"
+						disabled="@load(vm.user eq null)" />
+				</groupbox>
+			</vlayout>
+
+
+
+
+		</hlayout>
+	</div>
+</vlayout>

@@ -16,50 +16,45 @@ import com.fatin.util.LoginManager;
 @VariableResolver(DelegatingVariableResolver.class)
 public class LoginVM {
 
-	
-	
 	@WireVariable
 	private IUserSvc iUserSvc;
-	
+
 	private User user;
-	
+
 	@Init
-	public void init(){
+	public void init() {
 		user = new User();
 	}
-	
+
 	@Command
-	public void doLogin(){
+	public void doLogin() {
 		LoginManager lm = LoginManager.getIntance();
 		lm.logIn(user.getUserName(), user.getPassword());
-		
-		if(lm.isAuthenticated()){
-			Executions.getCurrent().getSession()
-			.setAttribute("id",lm.getUser().getId());
+
+		if (lm.isAuthenticated()) {
+			Executions.getCurrent().getSession().setAttribute("id", lm.getUser().getId());
 			Executions.sendRedirect("index.zul");
-		}else{
+		} else {
 			Clients.showNotification("Wrong username and password");
 		}
-		
+
 	}
-	
+
 	@Command
-	public void showPopupUserRegistration(){
+	public void showPopupUserRegistration() {
 		Executions.createComponents("/WEB-INF/lov/userRegLov.zul", null, null);
 	}
-	
+
 	@Command
-	public void sendCompanyUsernameRequest(){
+	public void sendCompanyUsernameRequest() {
 		int id = Integer.parseInt(AdrStringUtil.generateIdSecond());
 		user = new User();
-		user.setId(id);	
+		user.setId(id);
 		user.setIsApprove(0);
 		user.setRole("COMPANY");
-		user.setPassword("123");
-		
+
 		iUserSvc.save(user);
-		Clients.showNotification("Send request to system", "info", 
-				null, null, 1500);
+		Clients.showNotification("Send request to system", "info", null, null, 1500);
 	}
 
 	public User getUser() {
@@ -69,7 +64,5 @@ public class LoginVM {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	
+
 }

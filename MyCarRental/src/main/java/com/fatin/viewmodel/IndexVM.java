@@ -10,6 +10,7 @@ import org.zkoss.zul.Include;
 
 import com.fatin.model.User;
 import com.fatin.service.IUserSvc;
+import com.fatin.util.AdrStringUtil;
 
 @VariableResolver(DelegatingVariableResolver.class)
 public class IndexVM extends SelectorComposer<Component> {
@@ -31,7 +32,7 @@ public class IndexVM extends SelectorComposer<Component> {
 		if (role.equalsIgnoreCase("USER")) {
 			navigate("dashboardUser.zul");
 		} else if (role.equalsIgnoreCase("ADMIN")) {
-
+			AdrStringUtil.navigate("dashboardAdmin.zul");
 		} else if (role.equalsIgnoreCase("COMPANY")) {
 
 		}

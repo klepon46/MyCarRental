@@ -32,7 +32,7 @@ public class User {
 	private String email;
 	
 	@Column(name="IS_APPROVE")
-	private int isApprove;
+	private Integer isApprove;
 
 	public Integer getId() {
 		return id;
@@ -66,10 +66,10 @@ public class User {
 		this.password = password;
 	}
 
-	public int getIsApprove() {
+	public Integer getIsApprove() {
 		return isApprove;
 	}
-	public void setIsApprove(int isApprove) {
+	public void setIsApprove(Integer isApprove) {
 		this.isApprove = isApprove;
 	}
 
