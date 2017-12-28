@@ -1,0 +1,78 @@
+<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fatin.viewmodel.ProfilePageVM')">
+
+	<div sclass="container-fluid">
+
+		<div sclass="page-header">
+			<label value="Update Profile" />
+			<a label="Beta Version"
+				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
+		</div>
+
+		<hbox>
+			<cell width="100px">
+				<label value="User Name" />
+			</cell>
+			<cell>
+				<textbox value="@bind(vm.user.userName)" />
+			</cell>
+		</hbox>
+
+		<n:br />
+
+		<hbox>
+			<cell width="100px">
+				<label value="Password" />
+			</cell>
+			<cell>
+				<textbox value="@bind(vm.user.password)"
+					type="password" />
+			</cell>
+		</hbox>
+
+		<n:br />
+
+		<hbox>
+			<cell width="100px">
+				<label value="Name" />
+			</cell>
+			<cell>
+				<textbox value="@bind(vm.user.name)" />
+			</cell>
+		</hbox>
+
+		<n:br />
+
+		<hbox>
+			<cell width="100px">
+				<label value="Address" />
+			</cell>
+			<cell>
+				<textbox value="@bind(vm.user.address)" />
+			</cell>
+		</hbox>
+
+		<n:br />
+
+		<hbox>
+			<cell width="100px">
+				<label value="Email" />
+			</cell>
+			<cell>
+				<textbox value="@bind(vm.user.email)" />
+			</cell>
+		</hbox>
+
+		<n:br />
+
+		<hbox>
+			<button label="Update" onClick="@command('onUpdateProfile')"
+				sclass="btn-success" zclass="btn" />
+			<button label="Back" onClick="@command('backToDashboard')"
+				sclass="btn-warning" zclass="btn" />
+
+		</hbox>
+
+	</div>
+</vlayout>

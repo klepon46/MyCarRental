@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zul.Include;
 
 public class AdrStringUtil {
 
@@ -314,5 +315,15 @@ public class AdrStringUtil {
 	public static String getCurrentUser() {
 		return (String) Executions.getCurrent().getSession()
 				.getAttribute("userName");
+	}
+	
+	public static Integer getCurrentUserID() {
+		return (Integer) Executions.getCurrent().getSession()
+				.getAttribute("id");
+	}
+	
+	public static void navigate(String path) {
+		Include include = (Include) Executions.getCurrent().getDesktop().getPage("index").getFellow("mainmenu");
+		include.setSrc(path);
 	}
 }

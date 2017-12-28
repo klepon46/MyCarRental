@@ -22,6 +22,15 @@ public class User {
 	@Column(name = "PASSWORD")
 	private String password;
 	
+	@Column(name = "NAME")
+	private String name;
+
+	@Column(name = "ADRESS")
+	private String address;
+
+	@Column(name = "EMAIL")
+	private String email;
+	
 	@Column(name="IS_APPROVE")
 	private int isApprove;
 
@@ -62,6 +71,30 @@ public class User {
 	}
 	public void setIsApprove(int isApprove) {
 		this.isApprove = isApprove;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

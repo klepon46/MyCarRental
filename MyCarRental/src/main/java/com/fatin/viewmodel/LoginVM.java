@@ -54,7 +54,7 @@ public class LoginVM {
 		user = new User();
 		user.setId(id);	
 		user.setIsApprove(0);
-		user.setUserName("company");
+		user.setRole("COMPANY");
 		user.setPassword("123");
 		
 		iUserSvc.save(user);

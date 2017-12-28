@@ -1,5 +1,6 @@
 <vlayout sclass="page-content" xmlns:n="native" spacing="0"
-	apply="org.zkoss.bind.BindComposer">
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fatin.viewmodel.UserDashboardVM')">
 
 	<div sclass="container-fluid">
 
@@ -11,7 +12,7 @@
 
 		<hbox>
 			<button label="Update Profile" sclass="btn-success"
-				zclass="btn" />
+				zclass="btn" onClick="@command('navigateToUpdateProfilePage')" />
 
 			<button label="Book Car" sclass="btn-primary" zclass="btn" />
 

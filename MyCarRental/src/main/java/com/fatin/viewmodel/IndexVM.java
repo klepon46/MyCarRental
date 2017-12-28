@@ -3,11 +3,21 @@ package com.fatin.viewmodel;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zk.ui.select.annotation.VariableResolver;
+import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zkplus.spring.DelegatingVariableResolver;
 import org.zkoss.zul.Include;
 
+import com.fatin.model.User;
+import com.fatin.service.IUserSvc;
+
+@VariableResolver(DelegatingVariableResolver.class)
 public class IndexVM extends SelectorComposer<Component> {
 
 	private static final long serialVersionUID = 1L;
+
+	@WireVariable
+	private IUserSvc iUserSvc;
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -15,7 +25,16 @@ public class IndexVM extends SelectorComposer<Component> {
 
 		int userID = (Integer) Executions.getCurrent().getSession().getAttribute("id");
 
-		navigate("dashboardUser.zul");
+		User user = iUserSvc.findByUserID(userID);
+		String role = user.getRole();
+
+		if (role.equalsIgnoreCase("USER")) {
+			navigate("dashboardUser.zul");
+		} else if (role.equalsIgnoreCase("ADMIN")) {
+
+		} else if (role.equalsIgnoreCase("COMPANY")) {
+
+		}
 
 	}
 

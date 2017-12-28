@@ -22,4 +22,8 @@ public class IUserSvcImpl implements IUserSvc {
 		return dao.findUserByUserName(userName);
 	}
 
+	public User findByUserID(int userID) {
+		return dao.findByUserID(userID);
+	}
+
 }
