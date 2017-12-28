@@ -1,0 +1,84 @@
+<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fatin.viewmodel.CarServiceVM')">
+
+	<div sclass="container-fluid">
+
+		<div sclass="page-header">
+			<label value="Approve Company Request" />
+			<a label="Beta Version"
+				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
+		</div>
+
+		<hlayout>
+
+			<groupbox hflex="4">
+				<caption label="Car Details" />
+
+				<hbox>
+					<cell width="120px">
+						<label value="Car Name" />
+					</cell>
+					<cell>
+						<textbox value="@bind(vm.car.carName)" />
+					</cell>
+				</hbox>
+
+				<n:br />
+
+				<hbox>
+					<cell width="120px">
+						<label value="Car Type" />
+					</cell>
+					<cell>
+						<textbox value="@bind(vm.car.carType)" />
+					</cell>
+				</hbox>
+
+				<n:br />
+
+				<hbox>
+					<cell width="120px">
+						<label value="Rate" />
+					</cell>
+					<cell>
+						<intbox value="@bind(vm.car.carRate)" />
+					</cell>
+				</hbox>
+
+				<n:br />
+
+				<hbox>
+					<button label="Save" sclass="btn-info" zclass="btn"
+						onClick="@command('addCar')" />
+
+					<button label="Back" sclass="btn-danger" zclass="btn"
+						onClick="@command('back')" />
+				</hbox>
+			</groupbox>
+
+			<groupbox hflex="6">
+				<caption label="Car Lists" />
+				<listbox sclass="own-red" model="@load(vm.cars)"
+					mold="paging" pageSize="5" pagingPosition="bottom"
+					selectedItem="@save(vm.car)" emptyMessage="No Car Founds">
+					<listhead>
+						<listheader label="Car Name" />
+						<listheader label="Car Type" />
+						<listheader label="Car Rate" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.carName)" />
+							<listcell label="@load(each.carType)" />
+							<listcell label="@load(each.carRate)" />
+						</listitem>
+					</template>
+
+				</listbox>
+
+			</groupbox>
+
+		</hlayout>
+	</div>
+</vlayout>

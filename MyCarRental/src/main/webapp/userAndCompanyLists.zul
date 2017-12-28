@@ -56,7 +56,7 @@
 						</listcell>
 						<listcell>
 							<button label="Details" sclass="btn-primary"
-								zclass="btn" />
+								zclass="btn" onClick="@command('showCompanyCars', me = each)" />
 						</listcell>
 					</listitem>
 				</template>

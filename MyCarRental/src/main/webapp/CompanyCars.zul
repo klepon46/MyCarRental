@@ -1,0 +1,36 @@
+<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fatin.viewmodel.UserAndCompanyListsVM')">
+
+	<div sclass="container-fluid">
+
+		<div sclass="page-header">
+			<label value="Approve Company Request" />
+			<a label="Beta Version"
+				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
+		</div>
+
+
+		<groupbox>
+			<caption label="Car Lists" />
+			<listbox sclass="own-red" model="@load(vm.cars)"
+				mold="paging" pageSize="5" pagingPosition="bottom"
+				selectedItem="@save(vm.car)" emptyMessage="No Car Founds">
+				<listhead>
+					<listheader label="Car Name" />
+					<listheader label="Car Type" />
+					<listheader label="Car Rate" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell label="@load(each.carName)" />
+						<listcell label="@load(each.carType)" />
+						<listcell label="@load(each.carRate)" />
+					</listitem>
+				</template>
+
+			</listbox>
+		</groupbox>
+
+	</div>
+</vlayout>

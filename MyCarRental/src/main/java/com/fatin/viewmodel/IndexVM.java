@@ -34,7 +34,7 @@ public class IndexVM extends SelectorComposer<Component> {
 		} else if (role.equalsIgnoreCase("ADMIN")) {
 			AdrStringUtil.navigate("dashboardAdmin.zul");
 		} else if (role.equalsIgnoreCase("COMPANY")) {
-
+			AdrStringUtil.navigate("dashboardCompany.zul");
 		}
 
 	}

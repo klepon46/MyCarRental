@@ -32,7 +32,16 @@ public class ProfilePageVM {
 
 	@Command
 	public void backToDashboard() {
-		AdrStringUtil.navigate("dashboardUser.zul");
+		
+		String role = user.getRole();
+		
+		if(role.equalsIgnoreCase("USER")){
+			AdrStringUtil.navigate("dashboardUser.zul");
+		}else{
+			AdrStringUtil.navigate("dashboardCompany.zul");
+		}
+		
+		
 	}
 
 	public User getUser() {
