@@ -6,13 +6,11 @@
 
 		<div sclass="page-header">
 			<label value="Book Car" />
-			<a label="Beta Version"
-				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
 		</div>
 
 		<hlayout>
 
-			<groupbox hflex="4">
+			<groupbox hflex="3">
 				<caption label="Request Details" />
 
 				<hbox>
@@ -36,20 +34,36 @@
 
 			</groupbox>
 
-			<groupbox hflex="6">
+			<groupbox hflex="7">
 				<caption label="Available Cars" />
 				<listbox model="@load(vm.cars)" sclass="own-red"
-					mold="paging" pageSize="5" pagingPosition="bottom">
+					mold="paging" pageSize="5" pagingPosition="bottom" emptyMessage="No Records Found">
 					<listhead>
 						<listheader label="Name" />
 						<listheader label="Type" />
 						<listheader label="Rate/Day" />
+						<listheader label="Start Date" />
+						<listheader label="End Date" />
+						<listheader label="" />
 					</listhead>
 					<template name="model">
 						<listitem>
 							<listcell label="@load(each.carName)" />
 							<listcell label="@load(each.carType)" />
 							<listcell label="@load(each.carRate)" />
+							<listcell>
+								<datebox inplace="true"
+									value="@bind(vm.trxCarBook.startDate)" />
+							</listcell>
+							<listcell>
+								<datebox inplace="true"
+									value="@bind(vm.trxCarBook.endDate)" />
+							</listcell>
+							<listcell>
+								<button label="Book"
+									sclass="btn-success" zclass="btn"
+									onClick="@command('bookTheCar', me = each)" />
+							</listcell>
 						</listitem>
 					</template>
 				</listbox>

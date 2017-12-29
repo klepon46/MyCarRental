@@ -59,6 +59,8 @@ public class TrxCarBook {
 	}
 	
 	public Date getStartDate() {
+		if(startDate == null)
+			startDate = new Date();
 		return startDate;
 	}
 
@@ -67,6 +69,8 @@ public class TrxCarBook {
 	}
 
 	public Date getEndDate() {
+		if(endDate == null)
+			endDate = new Date();
 		return endDate;
 	}
 
