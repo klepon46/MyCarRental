@@ -14,6 +14,7 @@ import org.zkoss.zkplus.spring.DelegatingVariableResolver;
 
 import com.fatin.model.User;
 import com.fatin.service.IUserSvc;
+import com.fatin.util.AdrStringUtil;
 
 @VariableResolver(DelegatingVariableResolver.class)
 public class UserAndCompanyListsVM {
@@ -37,6 +38,11 @@ public class UserAndCompanyListsVM {
 		map.put("ID", user.getId());
 		
 		Executions.createComponents("/WEB-INF/lov/carCompanyLov.zul", null, map);
+	}
+	
+	@Command
+	public void back(){
+		AdrStringUtil.navigate("dashboardAdmin.zul");
 	}
 	
 	public List<User> getUsers() {

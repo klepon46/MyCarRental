@@ -6,8 +6,6 @@
 
 		<div sclass="page-header">
 			<label value="Welcome" />
-			<a label="Beta Version"
-				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
 		</div>
 
 		<hbox>

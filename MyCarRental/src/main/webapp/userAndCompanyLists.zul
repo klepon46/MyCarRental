@@ -6,10 +6,10 @@
 
 		<div sclass="page-header">
 			<label value="List User and Company" />
-			<a label="Beta Version"
-				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
 		</div>
 
+		<button label="Back" sclass="btn-danger" zclass="btn"
+			onClick="@command('back')" />
 
 		<groupbox>
 			<caption label="Users" />

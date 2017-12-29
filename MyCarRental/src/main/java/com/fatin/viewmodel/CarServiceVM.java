@@ -43,7 +43,7 @@ public class CarServiceVM {
 		cars = iCarSvc.findCarsByCompanyId(companyID);
 	}
 	
-	@NotifyChange
+	@Command
 	public void back(){
 		AdrStringUtil.navigate("dashboardCompany.zul");
 	}

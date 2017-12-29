@@ -5,9 +5,7 @@
 	<div sclass="container-fluid">
 
 		<div sclass="page-header">
-			<label value="Approve Company Request" />
-			<a label="Beta Version"
-				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
+			<label value="Car Service" />
 		</div>
 
 		<hlayout>

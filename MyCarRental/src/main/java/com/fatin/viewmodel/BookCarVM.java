@@ -54,6 +54,11 @@ public class BookCarVM {
 
 		cars = iCarSvc.findByTypeAndRate(carType, ratePerDay);
 	}
+	
+	@Command
+	public void back(){
+		AdrStringUtil.navigate("dashboardUser.zul");
+	}
 
 	@Command
 	public void bookTheCar(@BindingParam("me") Car car) {

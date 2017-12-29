@@ -1,4 +1,5 @@
 <?page id="index" title="Car Rental"?>
+<?init class="com.fatin.util.LoginInterceptor" ?>
 <?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
 <?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
 <!-- <?taglib uri="/WEB-INF/security.tld" prefix="sec"?> -->
@@ -17,19 +18,6 @@
 
 			<hlayout id="layout2" sclass="nav-user pull-right"
 				spacing="0">
-
-				<a id="plan" sclass="light-blue">
-					<label value="Customer Profile" />
-				</a>
-
-				<a id="hopper" sclass="light-blue">
-					<label value="Company Profile" />
-				</a>
-
-				<a id="stockpile" sclass="light-blue">
-					<label value="Admin" />
-				</a>
-
 				<menubar sclass="user-menu light-blue">
 					<menu id="menu"
 						image="assets/avatars/avatar2.png">

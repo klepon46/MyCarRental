@@ -12,6 +12,7 @@ import org.zkoss.zkplus.spring.DelegatingVariableResolver;
 
 import com.fatin.model.User;
 import com.fatin.service.IUserSvc;
+import com.fatin.util.AdrStringUtil;
 
 @VariableResolver(DelegatingVariableResolver.class)
 public class AdminApprovalPageVM {
@@ -35,7 +36,12 @@ public class AdminApprovalPageVM {
 
 		Clients.showNotification("Company user credential created", "info", null, null, 1500);
 	}
-
+	
+	@Command
+	public void back(){
+		AdrStringUtil.navigate("dashboardAdmin.zul");
+	}
+	
 	public List<User> getUsers() {
 		return users;
 	}

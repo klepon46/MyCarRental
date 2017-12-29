@@ -6,16 +6,18 @@
 
 		<div sclass="page-header">
 			<label value="Approve Company Request" />
-			<a label="Beta Version"
-				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
 		</div>
+
+		<button label="back" sclass="btn-danger" zclass="btn"
+			onClick="@command('back')" />
 
 		<hlayout>
 			<groupbox hflex="6">
 				<caption label="Request Lists" />
-				<listbox model="@load(vm.users)" sclass="own" mold="paging"
-					emptyMessage="No Data Found" selectedItem="@save(vm.user)"
-					pageSize="10" pagingPosition="bottom">
+				<listbox model="@load(vm.users)" sclass="own"
+					mold="paging" emptyMessage="No Data Found"
+					selectedItem="@save(vm.user)" pageSize="10"
+					pagingPosition="bottom">
 					<listhead>
 						<listheader label="CompanyID" />
 						<listheader label="Status" />

@@ -29,15 +29,23 @@
 					</cell>
 				</hbox>
 
-				<button onClick="@command('find')"
-					sclass="btn-info pull-right" zclass="btn" label="Find" />
+				<hbox>
+
+					<button onClick="@command('find')"
+						sclass="btn-info pull-right" zclass="btn" label="Find" />
+
+					<button onClick="@command('back')"
+						sclass="btn-danger pull-right" zclass="btn" label="Back" />
+
+				</hbox>
 
 			</groupbox>
 
 			<groupbox hflex="7">
 				<caption label="Available Cars" />
 				<listbox model="@load(vm.cars)" sclass="own-red"
-					mold="paging" pageSize="5" pagingPosition="bottom" emptyMessage="No Records Found">
+					mold="paging" pageSize="5" pagingPosition="bottom"
+					emptyMessage="No Records Found">
 					<listhead>
 						<listheader label="Name" />
 						<listheader label="Type" />
