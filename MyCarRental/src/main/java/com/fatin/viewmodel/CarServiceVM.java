@@ -18,36 +18,39 @@ public class CarServiceVM {
 
 	@WireVariable
 	private ICarSvc iCarSvc;
-	
+
 	private Car car;
 	private List<Car> cars;
-	
+
 	@Init
-	public void init(){
+	public void init() {
 		car = new Car();
-		
+
 		int companyId = AdrStringUtil.getCurrentUserID();
 		cars = iCarSvc.findCarsByCompanyId(companyId);
 	}
 
 	@Command
 	@NotifyChange("cars")
-	public void addCar(){
-		int carID = Integer.parseInt(AdrStringUtil.generateIdSecond());
+	public void addCar() {
+		if (car.getCarID() == null) {
+			int carID = Integer.parseInt(AdrStringUtil.generateIdSecond());
+			car.setCarID(carID);
+		}
+
 		int companyID = AdrStringUtil.getCurrentUserID();
-		
-		car.setCarID(carID);
+
 		car.setCompanyID(companyID);
 		iCarSvc.save(car);
-		
+
 		cars = iCarSvc.findCarsByCompanyId(companyID);
 	}
-	
+
 	@Command
-	public void back(){
+	public void back() {
 		AdrStringUtil.navigate("dashboardCompany.zul");
 	}
-	
+
 	public Car getCar() {
 		return car;
 	}
@@ -56,11 +59,9 @@ public class CarServiceVM {
 		this.car = car;
 	}
 
-
 	public List<Car> getCars() {
 		return cars;
 	}
-
 
 	public void setCars(List<Car> cars) {
 		this.cars = cars;

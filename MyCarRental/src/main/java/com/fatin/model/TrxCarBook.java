@@ -86,4 +86,29 @@ public class TrxCarBook {
 		this.totalPrice = totalPrice;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((bookID == null) ? 0 : bookID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TrxCarBook other = (TrxCarBook) obj;
+		if (bookID == null) {
+			if (other.bookID != null)
+				return false;
+		} else if (!bookID.equals(other.bookID))
+			return false;
+		return true;
+	}
+
 }
