@@ -26,10 +26,10 @@ public class BookCarVM {
 
 	@WireVariable
 	private ITrxCarBookSvc iTrxCarBookSvc;
-	
+
 	@WireVariable
 	private ICarSvc iCarSvc;
-	
+
 	private TrxCarBook trxCarBook;
 
 	private int totalPassenger;
@@ -45,20 +45,22 @@ public class BookCarVM {
 	@NotifyChange("cars")
 	public void find() {
 		String carType = determineCarType();
+		
+		System.out.println("kuda " + carType);
 		cars = iCarSvc.findByTypeAndRate(carType, ratePerDay);
 	}
-	
-	private String determineCarType(){
+
+	private String determineCarType() {
 		SearchParam searchParam = new SearchParam();
 		Facts facts = new Facts();
-		facts.put("passengger", 1);
+		facts.put("passengger", totalPassenger);
 		facts.put("car", searchParam);
 
 		Rule rule1 = new MVELRule().name("car rule").description("check passenger").priority(1)
 				.when("passengger > 4 && passengger <= 7 ").then("car.carType = 'MPV'; ");
 
 		Rule rule2 = new MVELRule().name("car rule 2").description("check passenger").priority(1)
-				.when("passengger < 5 ").then("car.carType = 'SEDAN'; ");
+				.when("passengger > 0 && passengger < 5 ").then("car.carType = 'SEDAN'; ");
 
 		Rules rules = new Rules();
 		rules.register(rule1);
@@ -66,9 +68,9 @@ public class BookCarVM {
 
 		RulesEngine engine = new DefaultRulesEngine();
 		engine.fire(rules, facts);
-		
+
 		return searchParam.getCarType();
-		
+
 	}
 
 	public TrxCarBook getTrxCarBook() {
@@ -102,6 +104,5 @@ public class BookCarVM {
 	public void setCars(List<Car> cars) {
 		this.cars = cars;
 	}
-	
-	
+
 }

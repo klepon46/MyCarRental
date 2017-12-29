@@ -30,7 +30,7 @@ public class ICarDaoImpl implements ICarDao {
 
 	@SuppressWarnings("unchecked")
 	public List<Car> findByTypeAndRate(String type, int rate) {
-		String hql = "from Car where carType = :type or carRate <= :rate) ";
+		String hql = "from Car where carType = :type and carRate <= :rate) ";
 		Query q = sessionFactory.getCurrentSession().createQuery(hql);
 		q.setString("type", type);
 		q.setInteger("rate", rate);

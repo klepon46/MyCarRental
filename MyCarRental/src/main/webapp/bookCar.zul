@@ -5,7 +5,7 @@
 	<div sclass="container-fluid">
 
 		<div sclass="page-header">
-			<label value="Approve Company Request" />
+			<label value="Book Car" />
 			<a label="Beta Version"
 				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
 		</div>
@@ -13,7 +13,7 @@
 		<hlayout>
 
 			<groupbox hflex="4">
-				<caption label="Car Details" />
+				<caption label="Request Details" />
 
 				<hbox>
 					<cell width="120px">Total Passengers</cell>
@@ -25,19 +25,19 @@
 				<n:br />
 
 				<hbox>
-					<cell width="120px">Rate/day</cell>
+					<cell width="120px">Budget</cell>
 					<cell>
 						<intbox value="@bind(vm.ratePerDay)" />
 					</cell>
 				</hbox>
 
-				<button onClick="@command('find')" sclass="btn-info"
-					zclass="btn" label="Find" />
+				<button onClick="@command('find')"
+					sclass="btn-info pull-right" zclass="btn" label="Find" />
 
 			</groupbox>
 
 			<groupbox hflex="6">
-				<caption label="Car Lists" />
+				<caption label="Available Cars" />
 				<listbox model="@load(vm.cars)" sclass="own-red"
 					mold="paging" pageSize="5" pagingPosition="bottom">
 					<listhead>
