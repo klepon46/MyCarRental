@@ -14,7 +14,8 @@
 			<button label="Update Profile" sclass="btn-success"
 				zclass="btn" onClick="@command('navigateToUpdateProfilePage')" />
 
-			<button label="Book Car" sclass="btn-primary" zclass="btn" />
+			<button label="Book Car" sclass="btn-primary" zclass="btn" 
+			onClick="@command('navigateToBookCarPage')"/>
 
 		</hbox>
 

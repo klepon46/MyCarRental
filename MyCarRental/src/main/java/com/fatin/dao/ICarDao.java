@@ -8,5 +8,6 @@ public interface ICarDao {
 
 	public void save(Car domain);
 	public List<Car> findCarsByCompanyId(int companyId);
+	public List<Car> findByTypeAndRate(String type, int rate);
 	
 }

@@ -1,0 +1,61 @@
+<vlayout sclass="page-content" xmlns:n="native" spacing="0"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.fatin.viewmodel.BookCarVM')">
+
+	<div sclass="container-fluid">
+
+		<div sclass="page-header">
+			<label value="Approve Company Request" />
+			<a label="Beta Version"
+				iconSclass="z-icon-angle-double-right" sclass="subtitle" />
+		</div>
+
+		<hlayout>
+
+			<groupbox hflex="4">
+				<caption label="Car Details" />
+
+				<hbox>
+					<cell width="120px">Total Passengers</cell>
+					<cell>
+						<intbox value="@bind(vm.totalPassenger)" />
+					</cell>
+				</hbox>
+
+				<n:br />
+
+				<hbox>
+					<cell width="120px">Rate/day</cell>
+					<cell>
+						<intbox value="@bind(vm.ratePerDay)" />
+					</cell>
+				</hbox>
+
+				<button onClick="@command('find')" sclass="btn-info"
+					zclass="btn" label="Find" />
+
+			</groupbox>
+
+			<groupbox hflex="6">
+				<caption label="Car Lists" />
+				<listbox model="@load(vm.cars)" sclass="own-red"
+					mold="paging" pageSize="5" pagingPosition="bottom">
+					<listhead>
+						<listheader label="Name" />
+						<listheader label="Type" />
+						<listheader label="Rate/Day" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.carName)" />
+							<listcell label="@load(each.carType)" />
+							<listcell label="@load(each.carRate)" />
+						</listitem>
+					</template>
+				</listbox>
+
+			</groupbox>
+
+		</hlayout>
+	</div>
+</vlayout>

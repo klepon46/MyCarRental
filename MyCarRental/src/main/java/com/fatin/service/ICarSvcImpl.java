@@ -24,4 +24,8 @@ public class ICarSvcImpl implements ICarSvc {
 		return dao.findCarsByCompanyId(companyId);
 	}
 
+	public List<Car> findByTypeAndRate(String type, int rate) {
+		return dao.findByTypeAndRate(type, rate);
+	}
+
 }

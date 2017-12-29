@@ -17,4 +17,8 @@ public class UserDashboardVM {
 		AdrStringUtil.navigate("profilePage.zul");
 	}
 	
+	@Command
+	public void navigateToBookCarPage(){
+		AdrStringUtil.navigate("bookCar.zul");
+	}
 }
