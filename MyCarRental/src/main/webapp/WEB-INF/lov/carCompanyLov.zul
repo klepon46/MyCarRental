@@ -1,0 +1,27 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="win" title="Cars in service"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.fatin.lov.CarCompanyLov')"
+		border="normal" mode="modal" closable="true" width="50%"
+		contentStyle="overflow: auto">
+
+		<listbox model="@load(vm.cars)" mold="paging" pageSize="5"
+			pagingPosition="bottom" sclass="own">
+			<listhead>
+				<listheader label="Car Name" />
+				<listheader label="Car Type" />
+				<listheader label="Car Rate" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.carName)" />
+					<listcell label="@load(each.carType)" />
+					<listcell label="@load(each.carRate)" />
+				</listitem>
+			</template>
+		</listbox>
+
+
+	</window>
+</zk>
