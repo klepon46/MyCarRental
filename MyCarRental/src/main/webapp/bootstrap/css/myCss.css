@@ -36,7 +36,7 @@ tr{
 }
 
 .gradient{
-	background: rgba(0, 153, 51, 0.7);
+	background: rgba(0, 100, 51, 0.7);
 	/*background: -moz-radial-gradient(center, ellipse cover, rgba(162,221,146,1) 0%, rgba(137,209,117,1) 41%, rgba(99,191,74,1) 100%);
 	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(162,221,146,1)), color-stop(41%, rgba(137,209,117,1)), color-stop(100%, rgba(99,191,74,1)));
 	background: -webkit-radial-gradient(center, ellipse cover, rgba(162,221,146,1) 0%, rgba(137,209,117,1) 41%, rgba(99,191,74,1) 100%);
@@ -44,4 +44,10 @@ tr{
 	background: -ms-radial-gradient(center, ellipse cover, rgba(162,221,146,1) 0%, rgba(137,209,117,1) 41%, rgba(99,191,74,1) 100%);
 	background: radial-gradient(ellipse at center, rgba(162,221,146,1) 0%, rgba(137,209,117,1) 41%, rgba(99,191,74,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a2dd92', endColorstr='#63bf4a', GradientType=1 );*/
+}
+
+#divTop {
+	
+	background: #ff0000
+	
 }

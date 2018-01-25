@@ -3,7 +3,7 @@
 <?init class="com.fatin.util.AftLoginInterceptor" ?>
 
 <div xmlns:x="zul" xmlns:zk="zk" xmlns:k="xhtml" sclass="gradient"
-	width="100%" height="100%">
+	width="100%" height="100%" style="background: #8bb1ef">
 
 	<style src="bootstrap/css/myCss.css" />
 
