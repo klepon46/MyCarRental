@@ -1,5 +1,6 @@
 package com.fatin.viewmodel;
 
+import java.util.Date;
 import java.util.List;
 
 import org.jeasy.rules.api.Facts;
@@ -39,11 +40,19 @@ public class BookCarVM {
 
 	private int totalPassenger;
 	private int ratePerDay;
+	private int diffDays;
 
 	private List<Car> cars;
+	
+	private Date startDate;
+	private Date endDate;
+	
+	
 
 	@Init
 	public void init() {
+		startDate = new Date();
+		endDate = new Date();
 		trxCarBook = new TrxCarBook();
 	}
 
@@ -52,7 +61,18 @@ public class BookCarVM {
 	public void find() {
 		String carType = determineCarType();
 
-		cars = iCarSvc.findByTypeAndRate(carType, ratePerDay);
+		LocalDate jodaStart = new LocalDate(startDate);
+		LocalDate jodaEnd = new LocalDate(endDate);
+
+		diffDays = Days.daysBetween(jodaStart, jodaEnd).getDays();
+
+		if (diffDays <= 0) {
+			Clients.showNotification("End date must after start date", 
+					"info", null, null, 1500);
+			return;
+		}
+		
+		cars = iCarSvc.findByTypeRateAndDate(carType, ratePerDay, startDate);
 	}
 	
 	@Command
@@ -61,28 +81,26 @@ public class BookCarVM {
 	}
 
 	@Command
+	@NotifyChange({"cars","trxCarBook"})
 	public void bookTheCar(@BindingParam("me") Car car) {
 		int bookID = Integer.parseInt(AdrStringUtil.generateIdSecond());
 
 		trxCarBook.setBookID(bookID);
 		trxCarBook.setCarID(car.getCarID());
 		trxCarBook.setCustomerID(AdrStringUtil.getCurrentUserID());
+		trxCarBook.setStartDate(startDate);
+		trxCarBook.setEndDate(endDate);
 
-		LocalDate jodaStart = new LocalDate(trxCarBook.getStartDate());
-		LocalDate jodaEnd = new LocalDate(trxCarBook.getEndDate());
+		
 
-		int diff = Days.daysBetween(jodaStart, jodaEnd).getDays();
-
-		if (diff <= 0) {
-			Clients.showNotification("End date must after start date", "danger", null, null, 1500);
-			return;
-		}
-
-		trxCarBook.setTotalPrice(diff * car.getCarRate());
+		trxCarBook.setTotalPrice(diffDays * car.getCarRate());
 
 		iTrxCarBookSvc.save(trxCarBook);
 		Clients.showNotification("Car Successfully booked", "info", null, null, 1500);
-
+		
+		trxCarBook = new TrxCarBook();
+		cars.clear();
+		
 	}
 
 	private String determineCarType() {
@@ -140,4 +158,19 @@ public class BookCarVM {
 		this.cars = cars;
 	}
 
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 }

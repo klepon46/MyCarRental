@@ -1,8 +1,10 @@
 package com.fatin.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,6 +38,20 @@ public class ICarDaoImpl implements ICarDao {
 		q.setInteger("rate", rate);
 		
 		return q.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Car> findByTypeRateAndDate(String type, int rate, Date date) {
+		
+		String sql = "select a.* from Car a "
+				+ "left join trx_car_Book b "
+				+ "on a.CAR_ID = b.CAR_ID "
+				+ "where b.END_DATE < :date OR END_DATE IS NULL ";
+		SQLQuery sq = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		sq.setDate("date", date);
+		sq.addEntity(Car.class);
+		
+		return sq.list();
 	}
 	
 }

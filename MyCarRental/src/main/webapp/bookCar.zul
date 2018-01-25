@@ -10,7 +10,7 @@
 
 		<hlayout>
 
-			<groupbox hflex="3">
+			<groupbox hflex="4">
 				<caption label="Request Details" />
 
 				<hbox>
@@ -29,19 +29,34 @@
 					</cell>
 				</hbox>
 
-				<hbox>
+				<n:br />
 
+				<hbox>
+					<cell width="120px">Book Date</cell>
+					<cell>
+						<datebox value="@bind(vm.startDate)" />
+					</cell>
+
+					to
+
+					<cell>
+						<datebox value="@bind(vm.endDate)" />
+					</cell>
+				</hbox>
+
+				<n:br />
+
+				<hbox>
 					<button onClick="@command('find')"
 						sclass="btn-info pull-right" zclass="btn" label="Find" />
 
 					<button onClick="@command('back')"
 						sclass="btn-danger pull-right" zclass="btn" label="Back" />
-
 				</hbox>
 
 			</groupbox>
 
-			<groupbox hflex="7">
+			<groupbox hflex="6">
 				<caption label="Available Cars" />
 				<listbox model="@load(vm.cars)" sclass="own-red"
 					mold="paging" pageSize="5" pagingPosition="bottom"
@@ -50,8 +65,6 @@
 						<listheader label="Name" />
 						<listheader label="Type" />
 						<listheader label="Rate/Day" />
-						<listheader label="Start Date" />
-						<listheader label="End Date" />
 						<listheader label="" />
 					</listhead>
 					<template name="model">
@@ -59,14 +72,6 @@
 							<listcell label="@load(each.carName)" />
 							<listcell label="@load(each.carType)" />
 							<listcell label="@load(each.carRate)" />
-							<listcell>
-								<datebox inplace="true"
-									value="@bind(vm.trxCarBook.startDate)" />
-							</listcell>
-							<listcell>
-								<datebox inplace="true"
-									value="@bind(vm.trxCarBook.endDate)" />
-							</listcell>
 							<listcell>
 								<button label="Book"
 									sclass="btn-success" zclass="btn"

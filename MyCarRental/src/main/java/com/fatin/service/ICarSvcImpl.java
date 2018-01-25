@@ -1,5 +1,6 @@
 package com.fatin.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,10 @@ public class ICarSvcImpl implements ICarSvc {
 
 	public List<Car> findByTypeAndRate(String type, int rate) {
 		return dao.findByTypeAndRate(type, rate);
+	}
+
+	public List<Car> findByTypeRateAndDate(String type, int rate, Date date) {
+		return dao.findByTypeRateAndDate(type, rate, date);
 	}
 
 }
