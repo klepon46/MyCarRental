@@ -81,7 +81,7 @@ public class BookCarVM {
 	}
 
 	@Command
-	@NotifyChange({"cars","trxCarBook"})
+	@NotifyChange({"cars","trxCarBook","totalPassenger","ratePerDay"})
 	public void bookTheCar(@BindingParam("me") Car car) {
 		int bookID = Integer.parseInt(AdrStringUtil.generateIdSecond());
 
@@ -91,16 +91,13 @@ public class BookCarVM {
 		trxCarBook.setStartDate(startDate);
 		trxCarBook.setEndDate(endDate);
 
-		
-
 		trxCarBook.setTotalPrice(diffDays * car.getCarRate());
 
 		iTrxCarBookSvc.save(trxCarBook);
-		Clients.showNotification("Car Successfully booked", "info", null, null, 1500);
+		Clients.showNotification("Car Successfully booked", "info", 
+				null, null, 1500);
 		
-		trxCarBook = new TrxCarBook();
-		cars.clear();
-		
+		clearField();
 	}
 
 	private String determineCarType() {
@@ -124,6 +121,13 @@ public class BookCarVM {
 
 		return searchParam.getCarType();
 
+	}
+	
+	private void clearField(){
+		totalPassenger = 0;
+		ratePerDay = 0;
+		trxCarBook = new TrxCarBook();
+		cars.clear();
 	}
 
 	public TrxCarBook getTrxCarBook() {
